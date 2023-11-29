@@ -1,0 +1,139 @@
+/*rythme*/
+.enchere {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+    justify-content: center; 
+    align-items: center; 
+    gap: 10px;
+
+ }
+  .enchere-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+  }
+
+  .item-enchere {
+    flex-basis: calc(50% - 10px);
+    min-height: 250px; 
+    max-width: fit-content;
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*articles*/
+
+.item-enchere h2 {
+    color: var(--couleur-darkblue);
+    font-family: var(--police-sous-titre);
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center; 
+}
+
+.item-enchere h2 a {
+    color: var(--couleur-primaire);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.item-enchere h4 {
+    background-color: var(--couleur-noir);
+    color: var(--couleur-blanc);
+    border-radius: 5px;
+    width: fit-content;
+}
+
+
+  .input-miser {
+    padding: 10px 20px;
+    width: 125px;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .details-timbre-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-around;
+  }
+
+  .details-timbre-container {
+    display: flex;
+    flex-wrap: wrap;
+
+  }
+  
+  
+  .info-box {
+    flex: 1; 
+    min-width: fit-content; 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.3);
+    text-align: center; 
+    background-color: var(--couleur-silver);
+  }
+  
+  .enchere-container {
+    display: flex;
+    flex-direction: column; 
+    
+  }
+  
+  .item-enchere {
+    display: flex;
+    flex-direction: row; 
+    gap: 20px; 
+    max-width: 600px;
+    box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.3);
+  }
+  
+  .image-container {
+    flex: 0 0 300px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .img-enchere {
+    width: 100%; 
+    height: auto; 
+  }
+  
+  .enchere-container {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mise-rapise {
+    display: flex;
+    justify-content: center;
+  }
+
+
+  @media (max-width: 550px) {
+    .enchere-container {
+      flex-basis: 100%;
+    }
+    .item-enchere {
+      flex-wrap: wrap;
+    }
+    .item-enchere > *{
+      flex-basis: 100%;
+    }
+    
+  } 

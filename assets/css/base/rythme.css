@@ -1,0 +1,15 @@
+
+/* Pour tablettes */
+@media (max-width: 768px) {
+    .item {
+      flex-basis: calc(50% - 10px);
+    }
+  }
+  
+  /* Pour mobiles */
+  @media (max-width: 480px) {
+    .item {
+      flex-basis: 100%;
+    }
+    
+  } 

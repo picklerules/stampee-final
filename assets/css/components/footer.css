@@ -1,0 +1,15 @@
+.footer-container {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+  gap: 10px; 
+}
+
+.footer-icon {
+  transition: transform 0.3s ease, fill 0.3s ease; 
+}
+
+
+.footer-icon:hover {
+  fill: var(--couleur-blanc);
+}

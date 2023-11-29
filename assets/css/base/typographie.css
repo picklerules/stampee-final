@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Bevan&family=Orbitron&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bevan&family=Russo+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bevan&family=Roboto&family=Russo+One&display=swap');
+
+:root{
+     --police-titre: 'Orbitron', sans-serif;
+     --police-sous-titre: 'Russo one' sans-serif;
+     --police-texte: 'Roboto', sans-serif;
+
+}
+

@@ -1,0 +1,132 @@
+
+/* Mise en page de l'en-tête */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 100px;
+    color: var(--couleur-blanc);
+}
+
+.site-name {
+    font-family: var(--police-titre);
+    font-size: 72px;
+    font-weight: bold;
+    margin-left: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    color: var(--couleur-primaire);
+}
+
+
+/* Styles pour le menu burger */
+#menu-toggle {
+    display: none;
+}
+
+.menu-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 22px;
+    width: 30px;
+    cursor: pointer;
+}
+
+.menu-burger span {
+    height: 4px;
+    width: 100%;
+    background-color: var(--couleur-blanc);
+}
+
+/* Styles pour la navigation */
+nav ul {
+    list-style: none;
+    font-family: var(--police-titre);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--couleur-blanc);
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+nav ul li a.actif {
+    background-color: var(--couleur-noir);
+    color: var(--couleur-blanc);
+    border-radius: 5px;
+}
+
+nav ul li a:hover{
+    background-color: var(--couleur-noir);
+    color: var(--couleur-blanc);
+    border-radius: 5px;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 60px;
+    left: -300px;
+    width: 300px;
+    height: fit-content;
+    background-color: rgba(0, 0, 184, 0.9);
+    transition: left 0.3s;
+    padding: 20px;
+    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 100vh; 
+    overflow-y: auto;
+    z-index: 2; 
+}
+
+#menu-toggle:checked ~ .modal {
+    left: 0;
+}
+
+.category {
+    color: var(--couleur-blanc);
+    font-family: var(--police-titre);
+    padding: 10px;
+    border: 1px solid var(--couleur-blanc);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.category:hover {
+    background-color: var(--couleur-darkblue);
+}
+
+/* Bouton de fermeture */
+.close-button {
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    cursor: pointer;
+    color: var(--couleur-blanc);
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+.close-button:hover {
+    color: var(--couleur-silver);
+}
+
+a {
+    text-decoration: none;
+    color: var(--couleur-blanc);
+}

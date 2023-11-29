@@ -1,0 +1,28 @@
+.hero-banner-accueil{
+    position: relative;
+    background-image: url('../../img/banner.png'); 
+    background-size: cover; 
+    background-position: center; 
+    min-height: 100vh; 
+    z-index: 1; 
+}
+
+
+.slogan {
+    position: absolute;
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    color: var(--couleur-blanc);
+    font-family: var(--police-titre);
+    text-align: center;
+    background: rgba(0, 0, 0, 0.7); 
+
+}
+
+.slogan h1 {
+    font-size: clamp(2.5rem, -0.625rem + 10vw, 4rem);
+    text-wrap: balance;
+}
+
+
