@@ -13,15 +13,15 @@
           
           <div class="details-timbre-container">
             <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
-              <div class="info-box">pays</div>
-              <div class="info-box">1967</div>
-              <div class="info-box">Usagé</div>
-              <div class="info-box">Rare, techno, retro</div>
-              <div class="info-box">Prix de départ: 40,00 $ CAD</div>
-              <div class="info-box">Enchère actuelle: 117,00 $ CAD</div>
-              <div class="info-box">18/11/2023</div>
+              <div class="info-box">{{ pays_origine.pays }}</div>
+              <div class="info-box"> {{ date_creation.date }} </div>
+              <div class="info-box"> {{ etat.etat }} </div>
+              <div class="info-box"> {{ categorie.categorie }} </div>
+              <div class="info-box">Prix de départ: {{ enchere.prix_min }} </div>
+              <div class="info-box">Date de début: {{ enchere.date_debut }} </div>
+              <div class="info-box">Date de fin: {{ enchere.date_fin }} </div>
               <form>  
-                <input type="text" class="input-miser" placeholder="00,00 $ CAD">
+                <input type="text" class="input-miser" placeholder="{{ enchere.prix_min }} $ CAD">
                 <input type="button" value="Miser" class="btn">
               </form>           
             </div>

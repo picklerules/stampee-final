@@ -1,0 +1,25 @@
+  /*Style pour les form*/
+
+  .form-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 1rem auto;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  }
+  
+  label, select {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  input, select {
+    width: 200px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--couleur-blanc);
+    border-radius: 4px;
+  }
+  

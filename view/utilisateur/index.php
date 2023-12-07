@@ -14,14 +14,14 @@
                     <tr>
                     <td>{{ utilisateur.username }}</td>
                     <td>{{ utilisateur.email }}</td>
-                    <td>{{ utilisateur.privilege }}</td>
-                    <td>{{ utilisateur.nom }}</td>
+                    <td>{{ privilege.privilege }}</td>
+                    <td>{{ timbre.nom }}</td>
                     </tr>
                 {% endfor %}
             </table>
             <br><br>
             
         </div>
-        <a href="{{path}}utilisateur/create" class="btn-add">Ajouter</a>
+        <a href="{{path}}utilisateur/create">Ajouter</a>
 </body>
 </html>
