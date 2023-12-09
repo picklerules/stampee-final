@@ -9,6 +9,7 @@ RequirePage::model('Categorie');
 RequirePage::model('Couleur');
 RequirePage::model('Etat');
 RequirePage::model('PaysOrigine');
+RequirePage::model('Image');
 RequirePage::library('Validation');
 
 
@@ -16,7 +17,9 @@ class ControllerTimbre extends Controller {
 
     public function index(){
         $timbre = new Timbre;
+        
         $timbresDetails = $timbre->getAllTimbresWithDetails();
+        $image = $timbre->getImagePath();
         return Twig::render('timbre/index.php', ['timbres'=>$timbresDetails]);
 
         
@@ -26,6 +29,15 @@ class ControllerTimbre extends Controller {
     public function show($id){
         $timbre = new Timbre;
         $selectId = $timbre->selectId($id);
+
+        $categorie = new Categorie;
+        $selectCategorie = $categorie->select('categorie');
+        $couleur = new Couleur;
+        $selectCouleur = $couleur->select('couleur');
+        $etat = new Etat;
+        $selectEtat = $etat->select('etat');
+        $pays = new PaysOrigine;
+        $selectPaysOrigine = $pays->select('pays');
 
         return Twig::render('timbre/show.php', ['timbre'=>$selectId]);
     }
@@ -96,7 +108,7 @@ class ControllerTimbre extends Controller {
 
         } else {
 
-            $_POST['image_principale'] = $imageFileName;
+            $_POST['file'] = $imageFileName;
             $timbre = new Timbre();
             $insertId = $timbre->insert($_POST);
             RequirePage::url('timbre/show/' . $insertId);
