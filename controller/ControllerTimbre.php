@@ -64,16 +64,15 @@ class ControllerTimbre extends Controller {
     }
     
     
-    public function store(){
-
+    public function store() {
         $validation = new Validation;
-        
+    
         // Assignation des variables
         $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
         $date_creation = isset($_POST['date_creation']) ? $_POST['date_creation'] : '';
         $tirage = isset($_POST['tirage']) ? $_POST['tirage'] : '';
         $dimensions = isset($_POST['dimensions']) ? $_POST['dimensions'] : '';
-        $certifie = isset($_POST['$certifie']) ? $_POST['certifie'] : '';
+        $certifie = isset($_POST['certifie']) ? $_POST['certifie'] : '';
     
         // Valide les données
         $validation->name('nom')->value($nom)->max(50)->required();
@@ -81,38 +80,52 @@ class ControllerTimbre extends Controller {
         $validation->name('tirage')->value($tirage)->pattern('int')->min(0); 
         $validation->name('dimensions')->value($dimensions)->max(255); 
         $validation->name('certifie')->value($certifie)->pattern('bool');
-         
-        if (!Validation::is_bool($certifie)) {
+    
+        if ($certifie && !Validation::is_bool($certifie)) {
             $validation->errors[] = 'Le format du champ certifie n\'est pas valide.';
         }
     
-        // Gestion de l'upload de l'image
-        $imageFileName = null;
-        if(isset($_FILES['fileToUpload']) && $_FILES['fileToUpload']['error'] == 0){
-            $target_dir = "uploads/";
-            $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-            
-            // Déplace le fichier uploadé
-            if(move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)){
-                $imageFileName = basename($_FILES["fileToUpload"]["name"]);
-            } else {
-                $validation->errors[] = "Erreur lors de l'upload de l'image.";
-            }
-        }
-    
-        // Continue avec la validation et l'insertion des données
         if(!$validation->isSuccess()){
-        
-            $errors =  $validation->displayErrors();
+            $errors = $validation->displayErrors();
             return Twig::render('timbre/create.php', ['errors' => $errors, 'timbre' => $_POST]);
-
         } else {
-
-            $_POST['file'] = $imageFileName;
+            // Insertion du timbre
             $timbre = new Timbre();
             $insertId = $timbre->insert($_POST);
-            RequirePage::url('timbre/show/' . $insertId);
+    
+            // Gestion de l'upload des images
+            if (isset($_FILES['images'])) {
+                $uploadDir = __DIR__ . '/'; // Assurez-vous que ce chemin est correct
 
+                if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
+                    echo "Le dossier d'upload n'existe pas ou n'est pas accessible en écriture : $uploadDir";
+                    return; // Arrêtez l'exécution si le dossier n'est pas correct
+                }
+
+                foreach ($_FILES['images']['name'] as $key => $name) {
+                    if ($_FILES['images']['error'][$key] === UPLOAD_ERR_OK) {
+                        $tmpName = $_FILES['images']['tmp_name'][$key];
+                        $filename = uniqid() . "_" . $name;
+                        $filepath = $uploadDir . $filename;
+
+                        if (move_uploaded_file($tmpName, $filepath)) {
+                            $image = new Image();
+                            $isMain = ($key == $_POST['main_image']) ? 1 : 0;
+                            $image->save([
+                                'file' => $filename,
+                                'image_principale' => $isMain,
+                                'id_timbre' => $insertId
+                            ]);
+                        } else {
+                            echo "Erreur lors du téléchargement de l'image $name : " . $_FILES['images']['error'][$key];
+                        }
+                    }
+                }
+            }
+
+
+            // Rediriger ou afficher un message de succès
+            RequirePage::url('timbre/show/' . $insertId);
         }
     }
     

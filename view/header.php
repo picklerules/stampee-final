@@ -36,12 +36,11 @@
           <ul>
               <li><a href="{{path}}" class="actif">Accueil</a></li>
               <li><a href="{{path}}timbre/index">Catalogue</a></li>
-              <li><a href="#">Actualités</a></li>
-              <li><a href="#">À propos</a></li>
-              <li><a href="#">Contact</a></li>
               {% if guest %}
               <li><a href="{{path}}login">Se connecter</a></li>
               {% else %}
+              <li><a href="{{path}}timbre/create">Ajouter un timbre</a>
+              <li><a href="{{path}}login/logout">Déconnection</a></li>
               {% if session.privilege == 1 %}
               <li><a href="{{path}}utilisateur">Utilisateurs</a></li>
               {% endif %}

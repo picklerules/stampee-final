@@ -6,7 +6,7 @@
     <div class="enchere-container">
       <article class="item-enchere">
         <div class="image-container">
-          <img class="img-enchere" src="./assets/img/timbre.png" alt="timbre techno">
+          <img class="img-enchere" src="./assets/img/timbre.png" alt="{{ timbre.nom }}">
         </div>
         <div class="enchere-container">
           <h2><a href="#">{{ timbre.nom }}</a></h2>

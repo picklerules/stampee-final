@@ -61,10 +61,20 @@
             </label>
 
 
-            <label>Image principale
-                <input type="file" name="fileToUpload" id="fileToUpload">
+            <!-- Champs pour le téléchargement d'images -->
+            <label>Images
+                <input type="file" name="images[]" multiple>
             </label>
-            <input type="submit" value="Save" class="btn">
+            
+            <!-- Un champ pour sélectionner l'image principale -->
+            <label>Image Principale
+                <select name="main_image">
+                    <!-- Les options seront générées dynamiquement en PHP après l'upload -->
+                </select>
+            </label>
+
+            <input type="submit" name="submit" value="Upload">
+
         </form>
         
     </div>
