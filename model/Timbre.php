@@ -29,6 +29,5 @@ class Timbre extends CRUD {
         return $stmt->fetchAll();
     }
 
-
-
 }
+

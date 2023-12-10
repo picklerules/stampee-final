@@ -79,12 +79,7 @@ class ControllerTimbre extends Controller {
         $validation->name('date_creation')->value($date_creation)->pattern('date_ymd')->required(); 
         $validation->name('tirage')->value($tirage)->pattern('int')->min(0); 
         $validation->name('dimensions')->value($dimensions)->max(255); 
-        $validation->name('certifie')->value($certifie)->pattern('bool');
-    
-        if ($certifie && !Validation::is_bool($certifie)) {
-            $validation->errors[] = 'Le format du champ certifie n\'est pas valide.';
-        }
-    
+
         if(!$validation->isSuccess()){
             $errors = $validation->displayErrors();
             return Twig::render('timbre/create.php', ['errors' => $errors, 'timbre' => $_POST]);
@@ -95,7 +90,7 @@ class ControllerTimbre extends Controller {
     
             // Gestion de l'upload des images
             if (isset($_FILES['images'])) {
-                $uploadDir = __DIR__ . '/'; // Assurez-vous que ce chemin est correct
+                $uploadDir = __DIR__ . '/../uploads/';// Assurez-vous que ce chemin est correct
 
                 if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
                     echo "Le dossier d'upload n'existe pas ou n'est pas accessible en écriture : $uploadDir";
