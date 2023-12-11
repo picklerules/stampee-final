@@ -6,9 +6,11 @@
     <div class="liste">
     {% for timbre in timbres %}
         <article class="item">
-          <img class="img-stamp" src="{{path}}uploads/{{ timbre.image_principale }}" alt="{{ timbre.nom }}" loading="lazy" >
+          
+          <img class="img-stamp" src="{{path}}uploads/{{ timbre.file }}" alt="{{ timbre.nom }}" loading="lazy">
+
           <h2><a href="{{path}}timbre/show/{{ timbre.id }}">{{ timbre.nom }}</a></h2>
-            <a href="{{path}}enchere/index" class="btn">Miser</a>
+            <a href="{{path}}timbre/show/{{ timbre.id }}" class="btn">Miser</a>
         </article>
         {% endfor %}
   </div>

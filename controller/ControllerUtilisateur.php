@@ -12,21 +12,21 @@ RequirePage::library('Validation');
 
 class ControllerUtilisateur extends Controller {
 
-    // public function __construct(){
-    //     CheckSession::sessionAuth();
-    //     if($_SESSION['privilege'] != 1) {
-    //         RequirePage::url('login');
-    //         exit();
-    //     }
-    // }
+    public function __construct(){
+        CheckSession::sessionAuth();
+        if($_SESSION['privilege'] != 1) {
+            RequirePage::url('login');
+            exit();
+        }
+    }
 
     public function index(){
         $utilisateur = new Utilisateur;
         $select = $utilisateur->select('username');
 
         $timbre = new Timbre;
-
         $privilege = new Privilege;
+        
         $select = $utilisateur->select('username, id_privilege, id_timbre_favori');
 
       

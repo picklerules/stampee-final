@@ -13,10 +13,10 @@
           
           <div class="details-timbre-container">
             <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
-              <div class="info-box">{{ pays_origine.pays }}</div>
-              <div class="info-box"> {{ date_creation.date }} </div>
-              <div class="info-box"> {{ etat.etat }} </div>
-              <div class="info-box"> {{ categorie.categorie }} </div>
+              <div class="info-box">{{ timbre.pays }}</div>
+              <div class="info-box"> {{ timbre.date }} </div>
+              <div class="info-box"> {{ timbre.etat }} </div>
+              <div class="info-box"> {{ timbre.categorie }} </div>
               <form>  
                 <input type="text" class="input-miser" placeholder="{{ enchere.prix_min }} $ CAD">
                 <input type="button" value="Miser" class="btn">

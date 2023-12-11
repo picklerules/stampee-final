@@ -19,7 +19,7 @@ class ControllerTimbre extends Controller {
         $timbre = new Timbre;
         
         $timbresDetails = $timbre->getAllTimbresWithDetails();
-        $image = $timbre->getImagePath();
+
         return Twig::render('timbre/index.php', ['timbres'=>$timbresDetails]);
 
         
@@ -29,17 +29,19 @@ class ControllerTimbre extends Controller {
     public function show($id){
         $timbre = new Timbre;
         $selectId = $timbre->selectId($id);
+        $timbresDetails = $timbre->getAllTimbresWithDetails();
+        // $categorie = new Categorie;
+        // $selectCategorie = $categorie->select('categorie');
+        // $couleur = new Couleur;
+        // $selectCouleur = $couleur->select('couleur');
+        // $etat = new Etat;
+        // $selectEtat = $etat->select('etat');
+        // $pays = new PaysOrigine;
+        // $selectPaysOrigine = $pays->select('pays');
+        // $image = new Image;
+        // $selectImage = $image->select('file');
 
-        $categorie = new Categorie;
-        $selectCategorie = $categorie->select('categorie');
-        $couleur = new Couleur;
-        $selectCouleur = $couleur->select('couleur');
-        $etat = new Etat;
-        $selectEtat = $etat->select('etat');
-        $pays = new PaysOrigine;
-        $selectPaysOrigine = $pays->select('pays');
-
-        return Twig::render('timbre/show.php', ['timbre'=>$selectId]);
+        return Twig::render('timbre/show.php', ['timbre'=>$selectId, 'image'=>$selectImage, 'categorie'=>$selectCategorie, 'couleur'=>$selectCouleur, 'etat'=>$selectEtat, 'pays'=>$selectPaysOrigine]);
     }
 
     public function create() {
