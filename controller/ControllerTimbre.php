@@ -17,8 +17,7 @@ class ControllerTimbre extends Controller {
 
     public function index(){
         $timbre = new Timbre;
-        
-        $timbresDetails = $timbre->getAllTimbresWithDetails();
+        $timbresDetails = $timbre-> getAllTimbresWithDetails();
 
         return Twig::render('timbre/index.php', ['timbres'=>$timbresDetails]);
 
@@ -29,7 +28,7 @@ class ControllerTimbre extends Controller {
     public function show($id){
         $timbre = new Timbre;
         $detailsDuTimbre = $timbre->getTimbreDetailsById($id);
-    
+        
         return Twig::render('timbre/show.php', ['timbre' => $detailsDuTimbre]);
     }
     

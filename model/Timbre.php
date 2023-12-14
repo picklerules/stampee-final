@@ -7,7 +7,7 @@ class Timbre extends CRUD {
     protected $fillable = ['nom', 'date_creation', 'tirage', 'dimensions', 'id_etat', 'id_pays_origine', 'id_categorie', 'id_couleur', 'certifie', 'id_utilisateur'];
 
     public function getAllTimbresWithDetails() {
-        $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, timbre.id_utilisateur, image.file, utilisateur.username, utilisateur.id
+        $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, timbre.id_utilisateur, image.file, utilisateur.username, utilisateur.id AS UserId
                 FROM timbre
                 JOIN etat ON timbre.id_etat = etat.id
                 JOIN pays_origine ON timbre.id_pays_origine = pays_origine.id

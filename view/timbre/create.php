@@ -35,7 +35,7 @@
                    {%  for pays in pays %}
                    <option value="{{ pays.id}}">{{ pays.pays }}</option>
                     {% endfor %}
-                </select>
+                </select> 
             </label>
 
             <label>Catégorie

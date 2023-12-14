@@ -1,7 +1,7 @@
 {{ include('header.php', {title: 'Ajouter une enchère'}) }}
 <body>
     <div class="form-container">
-        <form action="{{path}}enchere/store" method="post" enctype="multipart/form-data">
+        <form action="{{path}}enchere/store" method="post" >
         <span class="text-danger">{{ errors | raw }}</span>
 
         <label>Timbre à mettre à l'enchère

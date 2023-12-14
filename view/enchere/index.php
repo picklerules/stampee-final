@@ -2,10 +2,10 @@
 
   <main class="enchere">
 
-
+  {% for enchere in encheres %}
     <div class="enchere-container">
       <article class="item-enchere">
-      {% for enchere in encheres %}
+
         <div class="image-container">
           <img class="img-enchere" src="{{path}}uploads/{{ enchere.file }}" alt="{{ enchere.nom }}">
         </div>
@@ -33,10 +33,11 @@
             </div>
 
           </div>
-          {% endfor %}     
+   
         </article>
       </div>
-
+      {% endfor %}  
+<!-- 
       <div class="enchere-container">
         <article class="item-enchere">
           <div>
@@ -51,10 +52,9 @@
             </div>
           </article>
         </div>
-  
+   -->
 
     
-
     </main>
     
     {{ include('footer.php') }}

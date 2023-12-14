@@ -1,6 +1,11 @@
 /*grille*/
+.main-catalogue{
+  display: flex;
+  flex-direction: column;
+}
 
 .liste {
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px
