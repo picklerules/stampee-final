@@ -22,26 +22,27 @@ class ControllerUtilisateur extends Controller {
 
     public function index(){
         $utilisateur = new Utilisateur;
-        $select = $utilisateur->select('username');
-
-        $timbre = new Timbre;
+        $select = $utilisateur->select('username, email, id_privilege, id_timbre_favori');
+    
         $privilege = new Privilege;
-        
-        $select = $utilisateur->select('username, id_privilege, id_timbre_favori');
-
-      
-        foreach($select as $utilisateur){
-          
-            $selectPrivilege = $privilege->selectId($utilisateur['id_privilege']);
-            $utilisateur['privilege'] = $selectPrivilege['privilege'];
-
-           
-            $selectTimbre = $timbre->selectId($utilisateur['id_timbre_favori']);
-            $utilisateur['timbre'] = $selectTimbre['nom'];
+        $timbre = new Timbre;
+    
+        $i = 0;
+        foreach ($select as $user) {
+            // Ajout des informations de privilège
+            $selectPrivilege = $privilege->selectId($user['id_privilege']);
+            $select[$i]['privilege'] = $selectPrivilege['privilege'];
+    
+            // Ajout des informations de timbre favori
+            $selectTimbre = $timbre->selectId($user['id_timbre_favori']);
+            $select[$i]['nom_timbre'] = $selectTimbre ? $selectTimbre['nom'] : 'Aucun';
+    
+            $i++;
         }
-
-        return Twig::render('utilisateur/index.php', ['utilisateurs'=>$select]);
+    
+        return Twig::render('utilisateur/index.php', ['utilisateurs' => $select]);
     }
+    
 
     public function create(){ 
         $privilege = new Privilege;

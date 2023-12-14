@@ -28,21 +28,11 @@ class ControllerTimbre extends Controller {
 
     public function show($id){
         $timbre = new Timbre;
-        $selectId = $timbre->selectId($id);
-        $timbresDetails = $timbre->getAllTimbresWithDetails();
-        // $categorie = new Categorie;
-        // $selectCategorie = $categorie->select('categorie');
-        // $couleur = new Couleur;
-        // $selectCouleur = $couleur->select('couleur');
-        // $etat = new Etat;
-        // $selectEtat = $etat->select('etat');
-        // $pays = new PaysOrigine;
-        // $selectPaysOrigine = $pays->select('pays');
-        // $image = new Image;
-        // $selectImage = $image->select('file');
-
-        return Twig::render('timbre/show.php', ['timbre'=>$selectId, 'image'=>$selectImage, 'categorie'=>$selectCategorie, 'couleur'=>$selectCouleur, 'etat'=>$selectEtat, 'pays'=>$selectPaysOrigine]);
+        $detailsDuTimbre = $timbre->getTimbreDetailsById($id);
+    
+        return Twig::render('timbre/show.php', ['timbre' => $detailsDuTimbre]);
     }
+    
 
     public function create() {
 
@@ -75,6 +65,9 @@ class ControllerTimbre extends Controller {
         $tirage = isset($_POST['tirage']) ? $_POST['tirage'] : '';
         $dimensions = isset($_POST['dimensions']) ? $_POST['dimensions'] : '';
         $certifie = isset($_POST['certifie']) ? $_POST['certifie'] : '';
+        $id_utilisateur = $_SESSION['id'];
+
+        $_POST['id_utilisateur'] = $id_utilisateur;
     
         // Valide les données
         $validation->name('nom')->value($nom)->max(50)->required();

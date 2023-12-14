@@ -60,19 +60,10 @@
                 <input type="checkbox" name="certifie" value="1" {% if timbre.certifie %} checked {% endif %}>
             </label>
 
-
-            <!-- Champs pour le téléchargement d'images -->
             <label>Images
                 <input type="file" name="images[]" multiple>
             </label>
             
-            <!-- Un champ pour sélectionner l'image principale -->
-            <label>Image Principale
-                <select name="main_image">
-                    <!-- Les options seront générées dynamiquement en PHP après l'upload -->
-                </select>
-            </label>
-
             <input type="submit" name="submit" value="Upload">
 
         </form>

@@ -14,8 +14,8 @@
                     <tr>
                     <td>{{ utilisateur.username }}</td>
                     <td>{{ utilisateur.email }}</td>
-                    <td>{{ privilege.privilege }}</td>
-                    <td>{{ timbre.nom }}</td>
+                    <td>{{ utilisateur.privilege }}</td>
+                    <td>{{ utilisateur.nom_timbre }}</td>
                     </tr>
                 {% endfor %}
             </table>

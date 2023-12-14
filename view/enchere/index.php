@@ -5,27 +5,35 @@
 
     <div class="enchere-container">
       <article class="item-enchere">
+      {% for enchere in encheres %}
         <div class="image-container">
-          <img class="img-enchere" src="./assets/img/timbre.png" alt="timbre techno">
+          <img class="img-enchere" src="{{path}}uploads/{{ enchere.file }}" alt="{{ enchere.nom }}">
         </div>
         <div class="enchere-container">
-          <h2><a href="#">{{ timbre.nom }}</a></h2>
+
+          <h2><a href="#">{{ enchere.nom }}</a></h2>
           
           <div class="details-timbre-container">
+         
             <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
-              <div class="info-box">{{ pays_origine.pays }}</div>
-              <div class="info-box"> {{ date_creation.date }} </div>
-              <div class="info-box"> {{ etat.etat }} </div>
-              <div class="info-box"> {{ categorie.categorie }} </div>
-              <div class="info-box">Prix de départ: {{ enchere.prix_min }} </div>
+            <div class="info-box">{{ enchere.pays }}</div>
+              <!-- <div class="info-box">{{ enchere.tirage }} exemplaires</div>
+              <div class="info-box">{{ enchere.dimensions }} cm</div>
+              <div class="info-box"> {{ enchere.date_creation }} </div>
+              <div class="info-box"> {{ enchere.etat }} </div> -->
+              <!-- <div class="info-box"> {{ enchere.categorie }} </div> -->
+              <div class="info-box">Prix de départ: {{ enchere.prix_min }} $</div>
               <div class="info-box">Date de début: {{ enchere.date_debut }} </div>
               <div class="info-box">Date de fin: {{ enchere.date_fin }} </div>
               <form>  
                 <input type="text" class="input-miser" placeholder="{{ enchere.prix_min }} $ CAD">
                 <input type="button" value="Miser" class="btn">
-              </form>           
+              </form>   
+             
             </div>
+
           </div>
+          {% endfor %}     
         </article>
       </div>
 

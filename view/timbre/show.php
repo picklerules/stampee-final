@@ -6,7 +6,7 @@
     <div class="enchere-container">
       <article class="item-enchere">
         <div class="image-container">
-          <img class="img-enchere" src="./assets/img/timbre.png" alt="{{ timbre.nom }}">
+          <img class="img-enchere" src="{{path}}uploads/{{ timbre.file }}" alt="{{ timbre.nom }}">
         </div>
         <div class="enchere-container">
           <h2><a href="#">{{ timbre.nom }}</a></h2>
@@ -14,7 +14,9 @@
           <div class="details-timbre-container">
             <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
               <div class="info-box">{{ timbre.pays }}</div>
-              <div class="info-box"> {{ timbre.date }} </div>
+              <div class="info-box">{{ timbre.tirage }} exemplaires</div>
+              <div class="info-box">{{ timbre.dimensions }} cm</div>
+              <div class="info-box"> {{ timbre.date_creation }} </div>
               <div class="info-box"> {{ timbre.etat }} </div>
               <div class="info-box"> {{ timbre.categorie }} </div>
               <form>  
@@ -25,10 +27,9 @@
           </div>
         </article>
       </div>
-  
+
 
     
-
     </main>
     
     {{ include('footer.php') }}

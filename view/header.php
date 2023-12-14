@@ -5,6 +5,7 @@
                 <meta name="description" content="Page d'accueil du site Stampee pour mise aux enchères de timbre">
                 <title>{{ title }}</title>
                 <link rel="stylesheet" href="{{path}}assets/css/styles.css">
+                <script src="https://kit.fontawesome.com/0f52bb4695.js" crossorigin="anonymous"></script>
             </head>
             <body>
             <header>
@@ -35,16 +36,15 @@
       <nav>
           <ul>
               <li><a href="{{path}}" class="actif">Accueil</a></li>
-              <li><a href="{{path}}timbre/index">Catalogue</a></li>
+              <li><a href="{{path}}enchere/index">Catalogue d'enchères</a></li>
               {% if guest %}
               <li><a href="{{path}}login">Se connecter</a></li>
               {% else %}
-              <li><a href="{{path}}timbre/create">Ajouter un timbre</a>
-              <li><a href="{{path}}login/logout">Déconnection</a></li>
+              <li><a href="{{path}}timbre/index">Mes timbres</a></li>
               {% if session.privilege == 1 %}
               <li><a href="{{path}}utilisateur">Utilisateurs</a></li>
               {% endif %}
-              <li><a href="{{path}}login/logout">Logout</a></li>
+              <li><a href="{{path}}login/logout">Déconnection</a></li>
               {% endif %}
               
           </ul>
