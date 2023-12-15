@@ -8,7 +8,7 @@
                 <select name="id_timbre">
                     <option value="">Selectionner un timbre</option>
                    {%  for timbre in timbres %}
-                   <option value="{{ timbre.id}}"> {{ timbre.nom }}</option>
+                   <option value="{{ timbre.id}}"selected> {{ timbre.nom }}</option>
                     {% endfor %}
                 </select>
         </label>

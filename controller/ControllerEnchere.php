@@ -26,7 +26,7 @@ class ControllerEnchere extends Controller {
     }
 
 
-    public function create() {
+    public function create($idTimbre = null) {
 
         CheckSession::sessionAuth();        
         if ($_SESSION['privilege'] != 1 && $_SESSION['privilege'] != 2) {
@@ -34,10 +34,18 @@ class ControllerEnchere extends Controller {
             exit();
         }
         $timbre = new Timbre();
+
+        if ($idTimbre) {
+            
+            $timbres = [$timbre->selectId($idTimbre)];
+        } else {
+        
         $timbres = $timbre->getTimbresByUserId($_SESSION['id']); 
 
+     }
         return Twig::render('enchere/create.php', ['timbres' => $timbres]);
     }
+
 
     public function store() {
         $validation = new Validation;

@@ -11,7 +11,7 @@
           <img class="img-stamp" src="{{path}}uploads/{{ timbre.file }}" alt="{{ timbre.nom }}" loading="lazy">
 
           <h2><a href="{{path}}timbre/show/{{ timbre.id }}">{{ timbre.nom }}</a></h2>
-            <a href="{{path}}enchere/create" class="btn">Mettre en enchère</a>
+            <a href="{{path}}enchere/create/{{ timbre.id }}" class="btn">Mettre en enchère</a>
             <a href="#" class="btn">Modifier</a>
             <a href="#" class="btn">Supprimer</a>
         </article>
