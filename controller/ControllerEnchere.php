@@ -76,7 +76,10 @@ class ControllerEnchere extends Controller {
                 'id_utilisateur' => $_SESSION['id'] 
             ]);
 
-            return Twig::render('enchere/index.php', ['encheres'=>$encheresDetails]);
+            // return Twig::render('enchere/index.php', ['encheres'=>$encheresDetails]);
+            RequirePage::url('enchere/index');
+            exit();
+
         }
     }
 

@@ -7,8 +7,9 @@ body {
     font-family: var(--police-texte);
     background-color: var(--couleur-silver);
     color: var(--couleur-blanc);
-    margin-left: 1rem;
-    margin-right: 1rem;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 

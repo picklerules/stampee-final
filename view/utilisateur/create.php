@@ -12,6 +12,7 @@
             <label>Mot de passe
                 <input type="password" name="password" value="">
             </label>
+            {% if session.privilege == 1 %}
             <label>Privilege
                 <select name="id_privilege">
                     <option value="">Selectionner un privilege</option>
@@ -20,14 +21,8 @@
                     {% endfor %}
                 </select>
             </label>
-            <label>Timbre favori
-                <select name="id_timbre_favori">
-                    <option value="">Selectionner un timbre</option>
-                   {%  for timbre in timbres %}
-                   <option value="{{ timbre.id}}" {% if timbre.id == utilisateur.id_timbre_favori %} selected {% endif %}>{{ timbre.nom }}</option>
-                    {% endfor %}
-                </select>
-            </label>
+            {% endif %}
+
             <input type="submit" value="sauvegarder" class="btn">
         </form>
     </div>

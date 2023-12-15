@@ -12,20 +12,18 @@ RequirePage::library('Validation');
 
 class ControllerUtilisateur extends Controller {
 
-    public function __construct(){
+    public function index(){
+
         CheckSession::sessionAuth();
         if($_SESSION['privilege'] != 1) {
             RequirePage::url('login');
             exit();
         }
-    }
-
-    public function index(){
         $utilisateur = new Utilisateur;
-        $select = $utilisateur->select('username, email, id_privilege, id_timbre_favori');
+        $select = $utilisateur->select('username, email, id_privilege');
     
         $privilege = new Privilege;
-        $timbre = new Timbre;
+
     
         $i = 0;
         foreach ($select as $user) {
@@ -33,9 +31,7 @@ class ControllerUtilisateur extends Controller {
             $selectPrivilege = $privilege->selectId($user['id_privilege']);
             $select[$i]['privilege'] = $selectPrivilege['privilege'];
     
-            // Ajout des informations de timbre favori
-            $selectTimbre = $timbre->selectId($user['id_timbre_favori']);
-            $select[$i]['nom_timbre'] = $selectTimbre ? $selectTimbre['nom'] : 'Aucun';
+
     
             $i++;
         }
@@ -47,42 +43,44 @@ class ControllerUtilisateur extends Controller {
     public function create(){ 
         $privilege = new Privilege;
         $select = $privilege->select('privilege');
-        $timbreFavori = new Timbre;
-        $selectTimbre = $timbreFavori->select('nom');
-        return Twig::render('utilisateur/create.php', ['privileges' => $select, 'timbres' => $selectTimbre]);
+        return Twig::render('utilisateur/create.php', ['privileges' => $select]);
     }
 
-    public function store(){
+    public function store() {
         $validation = new Validation;
+    
+        // Extraction des données POST
         extract($_POST);
+    
+        // Application des règles de validation
         $validation->name('username')->value($username)->max(50)->required();
         $validation->name('password')->value($password)->max(255)->min(6)->required();
         $validation->name('email')->value($email)->max(50)->required()->pattern('email');
-        $validation->name('privilege')->value($id_privilege)->required();
-        $validation->name('timbre')->value($id_timbre_favori);
-
-
-        if(!$validation->isSuccess()){
-            $errors =  $validation->displayErrors();
-            $privilege = new Privilege;
-            $timbre = new Timbre;
-            $select = $privilege->select('privilege');
-            $selectTimbre = $timbre->select('nom');
-            return Twig::render('utilisateur/create.php', ['errors' =>$errors, 'privileges' => $select, 'timbres' => $selectTimbre, 'utilisateur' => $_POST]);
-            exit();
+    
+        if ($_SESSION['privilege'] != 1) {
+            $id_privilege = 2;
+        } else {
+            $id_privilege = $_POST['id_privilege'] ?? 2;
         }
-
+    
+        if(!$validation->isSuccess()) {
+            $errors =  $validation->displayErrors();
+            // Retour à la vue de création avec les messages d'erreur
+            $privilege = new Privilege;
+            $select = $privilege->select('privilege');
+            return Twig::render('utilisateur/create.php', ['errors' => $errors, 'privileges' => $select, 'utilisateur' => $_POST]);
+        }
+    
         $utilisateur = new Utilisateur;
+        
         
         //vérifier si l'utilisateur est unique
         if ($utilisateur->selectByUsername($username)) {
     
             $errors =  'L\'utilisateur existe déjà.';
             $privilege = new Privilege;
-            $timbre = new Timbre;
             $select = $privilege->select('privilege');
-            $selectTimbre = $timbre->select('nom');
-            return Twig::render('utilisateur/create.php', ['errors' => $errors, 'privileges' => $select, 'timbres' => $selectTimbre, 'utilisateur' => $_POST]);
+            return Twig::render('utilisateur/create.php', ['errors' => $errors, 'privileges' => $select, 'utilisateur' => $_POST]);
         }
 
 
@@ -93,9 +91,20 @@ class ControllerUtilisateur extends Controller {
         $passwordSalt = $_POST['password'].$salt;
         $_POST['password'] =  password_hash($passwordSalt , PASSWORD_BCRYPT, $options);
         
-        $insert = $utilisateur->insert($_POST);
+        $userData = [
+            'username' => $username,
+            'email' => $email,
+            'password' => $_POST['password'],
+            'id_privilege' => $id_privilege 
+        ];
+
+
+        $insert = $utilisateur->insert($userData);
+
 
         RequirePage::url('utilisateur');
+
+
     }
 }
 ?>

@@ -18,11 +18,11 @@
         <input type="date" id="date_debut" name="date_debut">
         <label for="date_fin">Date de fin</label>
         <input type="date" id="date_fin" name="date_fin">
-        <label>Coup de coeur
+        <!-- <label>Coup de coeur
                 <input type="checkbox" name="coup_de_coeur" value="1" {% if enchere.coup_de_coeur %} checked {% endif %}>
         </label>
-    
-        <input type="submit" name="submit" value="Upload">
+     -->
+        <input type="submit" name="submit" value="Publier l'enchère">
 
         </form>
         

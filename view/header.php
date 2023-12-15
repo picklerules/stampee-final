@@ -35,10 +35,10 @@
     </div>
       <nav>
           <ul>
-              <li><a href="{{path}}" class="actif">Accueil</a></li>
+              <li><a href="{{path}}">Accueil</a></li>
               <li><a href="{{path}}enchere/index">Catalogue d'enchères</a></li>
               {% if guest %}
-              <li><a href="#">Devenir membre</a></li>
+              <li><a href="{{path}}utilisateur/create">Devenir membre</a></li>
               <li><a href="{{path}}login">Se connecter</a></li>
               {% else %}
               <li><a href="{{path}}timbre/index">Mes timbres</a></li>

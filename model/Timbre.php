@@ -45,6 +45,26 @@ class Timbre extends CRUD {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getImagePath($id) {
+        $sql = "SELECT file FROM $this->table WHERE id = :id";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(":id", $id);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result ? "uploads/" . $result['file'] : null;
+    }
+
+    public function isTimbreInEnchere($idTimbre) {
+        $sql = "SELECT COUNT(*) FROM enchere WHERE id_timbre = :idTimbre";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':idTimbre', $idTimbre);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        return $count > 0;
+    }
+    
+
     
 
 }

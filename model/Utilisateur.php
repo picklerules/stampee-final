@@ -5,7 +5,7 @@ require_once('CRUD.php');
 class Utilisateur extends CRUD {
     protected $table = 'utilisateur';
     protected $primaryKey = 'id';
-    protected $fillable = ['username', 'email', 'password', 'id_privilege', 'id_timbre_favori'];
+    protected $fillable = ['username', 'email', 'password', 'id_privilege'];
 
 
     public function selectTimbreFavori() {

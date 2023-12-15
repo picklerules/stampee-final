@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 RequirePage::model('CRUD');
 RequirePage::model('Timbre');
@@ -84,11 +81,11 @@ class ControllerTimbre extends Controller {
     
             // Gestion de l'upload des images
             if (isset($_FILES['images'])) {
-                $uploadDir = __DIR__ . '/../uploads/';// Assurez-vous que ce chemin est correct
+                $uploadDir = __DIR__ . '/../uploads/';
 
                 if (!is_dir($uploadDir) || !is_writable($uploadDir)) {
                     echo "Le dossier d'upload n'existe pas ou n'est pas accessible en écriture : $uploadDir";
-                    return; // Arrêtez l'exécution si le dossier n'est pas correct
+                    return; 
                 }
 
                 foreach ($_FILES['images']['name'] as $key => $name) {
@@ -112,11 +109,40 @@ class ControllerTimbre extends Controller {
                 }
             }
 
-
-            // Rediriger ou afficher un message de succès
             RequirePage::url('timbre/show/' . $insertId);
         }
     }
+
+    public function destroy() {
+        CheckSession::sessionAuth();
+        if ($_SESSION['privilege'] == 1 || $_SESSION['privilege'] == 2) {
+            $timbre = new Timbre();
+    
+            if ($timbre->isTimbreInEnchere($_POST['id'])) {
+              
+                $error = 'Vous ne pouvez pas supprimer un timbre qui est actuellement en enchère.';
+                return Twig::render('timbre/index.php', ['error' => $error, 'timbres' => $timbre->getAllTimbresWithDetails()]);
+            }
+    
+            // Récupérer le chemin de l'image
+            $cheminImage = $timbre->getImagePath($_POST['id']);
+            
+            // Supprimer l'image si elle existe
+            if ($cheminImage && file_exists($cheminImage)) {
+                unlink($cheminImage);
+            }
+    
+        
+            $timbre->delete($_POST['id']);
+    
+        
+            RequirePage::url('timbre/index');
+        } else {
+          
+            RequirePage::url('login');
+        }
+    }
+    
     
 
 }

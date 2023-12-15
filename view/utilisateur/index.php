@@ -7,7 +7,6 @@
                     <th>Username</th>
                     <th>Email</th>
                     <th>Privilege</th>
-                    <th>Timbre favori</th>
 
                 </tr>
                 {% for utilisateur in utilisateurs %}
@@ -15,7 +14,6 @@
                     <td>{{ utilisateur.username }}</td>
                     <td>{{ utilisateur.email }}</td>
                     <td>{{ utilisateur.privilege }}</td>
-                    <td>{{ utilisateur.nom_timbre }}</td>
                     </tr>
                 {% endfor %}
             </table>

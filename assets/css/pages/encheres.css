@@ -2,17 +2,19 @@
 .enchere {
     display: flex;
     flex-wrap: wrap;
-    flex: 1;
+    /* flex: 1; */
     justify-content: center; 
     align-items: center; 
     gap: 10px;
+  
 
  }
   .enchere-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
+    flex: 1;
+    min-width: 40%;
   }
 
   .item-enchere {
@@ -100,17 +102,20 @@
     gap: 20px; 
     max-width: 600px;
     box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
   }
   
   .image-container {
-    flex: 0 0 300px;
+    /*flex: 0 0 300px;*/
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
+    max-width:80%;
+    
   }
   
   .img-enchere {
     width: 100%; 
-    height: auto; 
+    /* height: auto;  */
   }
   
   .enchere-container {
