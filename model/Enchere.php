@@ -11,7 +11,7 @@ class Enchere extends CRUD {
 
     public function getEnchereWithDetails(){
 
-        $sql = "SELECT enchere.*, timbre.*, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, image.file
+        $sql = "SELECT enchere.id AS enchereId, prix_min, date_debut, date_fin, coup_de_coeur, enchere.id_utilisateur, active, enchere.id_timbre, timbre.*, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, image.file
                 FROM enchere
                 JOIN timbre ON enchere.id_timbre = timbre.id
                 JOIN etat ON timbre.id_etat = etat.id

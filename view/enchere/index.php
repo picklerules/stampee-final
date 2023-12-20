@@ -12,25 +12,22 @@
         </div>
         <div class="enchere-container">
 
-          <h2><a href="#">{{ enchere.nom }}</a></h2>
+          <h2><a href="#">{{ enchere.nom }} {{ enchere.enchereId}} </a></h2>
           
           <div class="details-timbre-container">
          
             <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
             <div class="info-box">{{ enchere.pays }}</div>
-              <!-- <div class="info-box">{{ enchere.tirage }} exemplaires</div>
-              <div class="info-box">{{ enchere.dimensions }} cm</div>
-              <div class="info-box"> {{ enchere.date_creation }} </div>
-              <div class="info-box"> {{ enchere.etat }} </div> -->
-              <!-- <div class="info-box"> {{ enchere.categorie }} </div> -->
               <div class="info-box">Prix de départ: {{ enchere.prix_min }} $</div>
               <div class="info-box">Date de début: {{ enchere.date_debut }} </div>
               <div class="info-box">Date de fin: {{ enchere.date_fin }} </div>
-              <form>  
-                <input type="text" class="input-miser" placeholder="{{ enchere.prix_min }} $ CAD">
-                <input type="button" value="Miser" class="btn">
-              </form>   
-             
+              <form action="{{path}}mise/store" method="post">  
+                  <input type="text" name="prix_offert" class="input-miser" placeholder="{{ enchere.max_mise ? enchere.max_mise ~ ' $ CAD' : enchere.prix_min ~ ' $ CAD' }} ">
+                  <input type="hidden" name="prix_min" value="{{ enchere.prix_min }}">
+                  <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
+                  <button type="submit" class="btn">Miser</button>
+              </form>
+                          
             </div>
 
           </div>

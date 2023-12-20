@@ -10,6 +10,8 @@ RequirePage::model('Couleur');
 RequirePage::model('Etat');
 RequirePage::model('PaysOrigine');
 RequirePage::model('Mise');
+RequirePage::model('Utilisateur');
+RequirePage::model('Enchere');
 RequirePage::model('Image');
 RequirePage::library('Validation');
 
@@ -18,12 +20,48 @@ class ControllerMise extends Controller {
 
     public function index(){
         $mise = new Mise;
-        $misesDetails = $mise-> getAllMisesWithDetails();
+        $id_utilisateur = $_SESSION['id'];
+        $misesDetails = $mise-> getAllMisesWithDetails($id_utilisateur);
+
 
         return Twig::render('mise/index.php', ['mises'=>$misesDetails]);
-
-        
     }
-}
 
+
+    public function store() {
+        CheckSession::sessionAuth();        
+        if ($_SESSION['privilege'] != 1 && $_SESSION['privilege'] != 2) {
+            RequirePage::url('login');
+            exit();
+        }
+        $validation = new Validation();
+
+        $prix_offert = isset($_POST['prix_offert']) ? $_POST['prix_offert'] : '';
+        $id_enchere = isset($_POST['id_enchere']) ? $_POST['id_enchere'] : '';
+        $id_utilisateur = $_SESSION['id'];
+
+        $validation->name('prix_offert')->value($prix_offert)->pattern('float')->required();
+
+        if (!$validation->isSuccess()) {
+            $errors = $validation->displayErrors();
+            $enchere = new Enchere();
+            $encheresDetails = $enchere->getEnchereWithDetails();
+            return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
+        }
+        
+    
+        $mise = new Mise();
+        $misesDetails = $mise->getAllMisesWithDetails($id_utilisateur);
+        $mise->insert([
+            'prix_offert' => $prix_offert,
+            'date_heure' => date("Y-m-d H:i:s"),
+            'id_enchere' => $id_enchere,
+            'id_utilisateur' => $id_utilisateur
+        ]);
+
+    
+        RequirePage::url('mise/index');
+    }
+    
+}
 ?>
