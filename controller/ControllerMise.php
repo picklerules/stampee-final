@@ -34,31 +34,53 @@ class ControllerMise extends Controller {
             RequirePage::url('login');
             exit();
         }
+    
         $validation = new Validation();
-
+    
         $prix_offert = isset($_POST['prix_offert']) ? $_POST['prix_offert'] : '';
         $id_enchere = isset($_POST['id_enchere']) ? $_POST['id_enchere'] : '';
         $id_utilisateur = $_SESSION['id'];
 
+        
+    
         $validation->name('prix_offert')->value($prix_offert)->pattern('float')->required();
-
+    
         if (!$validation->isSuccess()) {
             $errors = $validation->displayErrors();
             $enchere = new Enchere();
             $encheresDetails = $enchere->getEnchereWithDetails();
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
         }
-        
     
+        $enchere = new Enchere();
+        $encheresDetails = $enchere->getEnchereWithDetails();
+        $detailEnchere = $enchere->selectId($id_enchere); 
+        //recupérer le prix minimum
+        $prixMinEnchere = $detailEnchere['prix_min'];
+
+    
+        // Vérification de la mise maximale
         $mise = new Mise();
-        $misesDetails = $mise->getAllMisesWithDetails($id_utilisateur);
-        $mise->insert([
+        $maxMise = $mise->getMaxMise($id_enchere);
+        $maxMiseValue = $maxMise ? $maxMise['max_mise'] : $prixMinEnchere; 
+
+        if ($prix_offert <= $maxMiseValue) {
+            $errors = "Votre mise doit être supérieure à la mise actuelle.";
+            return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
+        }
+    
+        // Insertion de la nouvelle mise
+        $insertResult = $mise->insert([
             'prix_offert' => $prix_offert,
             'date_heure' => date("Y-m-d H:i:s"),
             'id_enchere' => $id_enchere,
             'id_utilisateur' => $id_utilisateur
         ]);
-
+    
+        if (!$insertResult) {
+            echo "Erreur lors de l'insertion de la mise.";
+            return;
+        }
     
         RequirePage::url('mise/index');
     }

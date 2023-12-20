@@ -1,7 +1,8 @@
 {{ include('header.php', {title: 'Enchère'}) }}
 <a href="{{path}}mise/index" class="btn">Voir mes mises</a>
-  <main class="enchere">
+<span class="text-danger">{{ errors | raw }}</span>
 
+  <main class="enchere">
 
   {% for enchere in encheres %}
     <div class="enchere-container">
