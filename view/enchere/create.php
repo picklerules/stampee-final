@@ -27,4 +27,4 @@
         </form>
         
     </div>
-{{ include('footer.php') }}
+    {{ include('footer.php') }}

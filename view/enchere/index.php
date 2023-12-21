@@ -33,6 +33,7 @@
                 <input type="hidden" name="id" value="{{ enchere.enchereId }}">
                 <button type="submit" class="btn">Supprimer</button>
               </form> 
+              <a href="{{path}}enchere/edit/{{ enchere.enchereId }}" class="btn">Modifier</a>
               {% endif %}         
             </div>
 

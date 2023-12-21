@@ -27,8 +27,9 @@ class Enchere extends CRUD {
 
     public function isEnchereInMise($idEnchere) {
         $sql = "SELECT COUNT(*) 
-        FROM mise 
-        WHERE id_enchere = :idEnchere";
+                FROM mise 
+                WHERE id_enchere = :idEnchere";
+
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':idEnchere', $idEnchere);
         $stmt->execute();
@@ -36,17 +37,29 @@ class Enchere extends CRUD {
         return $count > 0;
     }
 
-    public function getUserIdByEnchereId($enchereId) {
+    public function getUserIdByEnchereId($idEnchere) {
         $sql = "SELECT id_utilisateur 
-        FROM enchere 
-        WHERE id = :id";
+                FROM enchere 
+                WHERE id = :id";
+                
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':id', $enchereId);
+        $stmt->bindValue(':id', $idEnchere);
         $stmt->execute();
         $result = $stmt->fetch();
         return $result ? $result['id_utilisateur'] : null;
     }
     
+    public function getEnchereWithDetailsById($idEnchere) {
+        $sql = "SELECT enchere.*, timbre.nom
+                FROM enchere 
+                JOIN timbre ON enchere.id_timbre = timbre.id 
+                WHERE enchere.id = :idEnchere";
+    
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':idEnchere', $idEnchere);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
 
 ?>

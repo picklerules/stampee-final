@@ -45,6 +45,7 @@ class ControllerEnchere extends Controller {
         if ($idTimbre) {
             
             $timbres = [$timbre->selectId($idTimbre)];
+
         } else {
         
         $timbres = $timbre->getTimbresByUserId($_SESSION['id']); 
@@ -63,7 +64,6 @@ class ControllerEnchere extends Controller {
         $date_debut = isset($_POST['date_debut']) ? $_POST['date_debut'] : '';
         $date_fin = isset($_POST['date_fin']) ? $_POST['date_fin'] : '';
         $id_timbre = isset($_POST['id_timbre']) ? $_POST['id_timbre'] : '';
-
 
 
         $validation->name('prix_min')->value($prix_min)->pattern('float')->required();
@@ -92,6 +92,57 @@ class ControllerEnchere extends Controller {
             exit();
 
         }
+    }
+
+    public function edit($id) {
+
+        $enchere = new Enchere();
+        $encheresDetails = $enchere->getEnchereWithDetailsById($id);
+
+        // var_dump($encheresDetails);
+        // die();
+
+        return Twig::render('enchere/edit.php', ['enchere' => $encheresDetails]);
+
+    }
+
+    public function update() {
+        $validation = new Validation;
+        // Assignation des variables
+        $prix_min = isset($_POST['prix_min']) ? $_POST['prix_min'] : '';
+        $date_debut = isset($_POST['date_debut']) ? $_POST['date_debut'] : '';
+        $date_fin = isset($_POST['date_fin']) ? $_POST['date_fin'] : '';
+        $id_timbre = isset($_POST['id_timbre']) ? $_POST['id_timbre'] : '';
+        $id_utilisateur = $_SESSION['id'];
+        $idEnchere = isset($_POST['id'])? $_POST['id'] : '';
+
+
+        //Supprimer la clé submit du post
+        unset($_POST['submit']);
+    
+        // Valide les données
+        $validation->name('prix_min')->value($prix_min)->pattern('float')->required();
+        $validation->name('date_debut')->value($date_debut)->pattern('date_ymd')->required();
+        $validation->name('date_fin')->value($date_fin)->pattern('date_ymd')->required();
+
+        if(!$validation->isSuccess()){
+
+            $mise = new Mise();
+            $enchere = new Enchere();
+            $encheresDetails = $enchere->getEnchereWithDetailsById($idEnchere);
+    
+
+            $errors =  $validation->displayErrors();
+
+            return Twig::render('enchere/edit.php', ['enchere' => $encheresDetails, 'errors' => $errors]);
+
+        } else {
+            $enchere = new Enchere;
+            $update = $enchere->update($_POST);
+            RequirePage::url('enchere/index/');
+        }
+
+
     }
 
 
