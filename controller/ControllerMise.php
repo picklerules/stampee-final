@@ -34,7 +34,8 @@ class ControllerMise extends Controller {
             RequirePage::url('login');
             exit();
         }
-    
+
+        $mise = new Mise();
         $validation = new Validation();
     
         $prix_offert = isset($_POST['prix_offert']) ? $_POST['prix_offert'] : '';
@@ -49,6 +50,12 @@ class ControllerMise extends Controller {
             $errors = $validation->displayErrors();
             $enchere = new Enchere();
             $encheresDetails = $enchere->getEnchereWithDetails();
+
+            foreach ($encheresDetails as $key => $enchereDetail) {
+                $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
+                $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
+            }
+            
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
         }
     
@@ -66,6 +73,12 @@ class ControllerMise extends Controller {
 
         if ($prix_offert <= $maxMiseValue) {
             $errors = "Votre mise doit être supérieure à la mise actuelle.";
+            $enchere = new Enchere();
+            $encheresDetails = $enchere->getEnchereWithDetails();
+
+            foreach ($encheresDetails as $key => $enchereDetail) {
+                $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
+                $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
         }
     
@@ -85,5 +98,6 @@ class ControllerMise extends Controller {
         RequirePage::url('mise/index');
     }
     
+    }
 }
 ?>

@@ -20,7 +20,14 @@ class ControllerEnchere extends Controller {
 
     public function index(){
         $enchere = new Enchere();
+        $mise = new Mise();
         $encheresDetails = $enchere->getEnchereWithDetails();
+
+        foreach ($encheresDetails as $key => $enchereDetail) {
+            $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
+            $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
+       
+        }
     
         return Twig::render('enchere/index.php', ['encheres' => $encheresDetails]);
     }

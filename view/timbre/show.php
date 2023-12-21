@@ -20,9 +20,12 @@
               <div class="info-box"> {{ timbre.etat }} </div>
               <div class="info-box"> {{ timbre.categorie }} </div>
               <form>  
-                <input type="text" class="input-miser" placeholder="{{ enchere.prix_min }} $ CAD">
-                <input type="button" value="Miser" class="btn">
+              <a href="{{path}}enchere/create/{{ timbre.id }}" class="btn">Mettre en enchère</a>
               </form>           
+              <a href="#" class="btn">Modifier</a>
+              <form action="{{path}}timbre/destroy" method="post">
+                <input type="hidden" name="id" value="{{ timbre.id }}">
+                <button type="submit" class="btn">Supprimer</button>
             </div>
           </div>
         </article>

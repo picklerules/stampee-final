@@ -113,6 +113,54 @@ class ControllerTimbre extends Controller {
         }
     }
 
+    public function edit($id) {
+
+        $timbre = new Timbre();
+        $images = new Image();
+        $timbreDetails = $timbre->getTimbreDetailsById($id);
+        $selectCategorie = $timbre->select('categorie');
+        $selectCouleur = $timbre->select('couleur');
+        $selectEtat = $timbre->select('etat');
+        $selectPaysOrigine = $timbre->select('pays');
+        $selectImages = $images->select('image');
+        return Twig::render('timbre/edit.php', ['timbre' => $timbreDetails, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'images' => $selectImages]);
+
+    }
+
+    public function update() {
+        $validation = new Validation;
+        extract($_POST);
+        $id_utilisateur = $_SESSION['id'];
+
+        // Valide les données
+        $validation->name('nom')->value($nom)->max(50)->required();
+        $validation->name('date_creation')->value($date_creation)->pattern('date_ymd')->required(); 
+        $validation->name('tirage')->value($tirage)->pattern('int')->min(0); 
+        $validation->name('dimensions')->value($dimensions)->max(255); 
+
+        if(!$validation->isSuccess()){
+
+            $categorie = new Categorie;
+            $selectCategorie = $categorie->select('categorie');
+            $couleur = new Couleur;
+            $selectCouleur = $couleur->select('couleur');
+            $etat = new Etat;
+            $selectEtat = $etat->select('etat');
+            $pays = new PaysOrigine;
+            $selectPaysOrigine = $pays->select('pays');
+            $errors =  $validation->displayErrors();
+            return Twig::render('timbre/show.php', ['timbre' => $_POST, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'errors' => $errors]);
+
+        } else {
+            $timbre = new Timbre;
+            $update = $timbre->update($_POST);
+            RequirePage::url('timbre/show/'.$_POST['id']);
+        }
+
+
+    }
+
+
     public function destroy() {
         CheckSession::sessionAuth();
         if ($_SESSION['privilege'] == 1 || $_SESSION['privilege'] == 2) {
