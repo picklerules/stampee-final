@@ -68,7 +68,7 @@ abstract class CRUD extends PDO {
         $queryField = rtrim($queryField, ", ");
         
         $sql = "UPDATE $this->table SET $queryField WHERE $this->primaryKey = :$this->primaryKey";
-    
+        
         $stmt = $this->prepare($sql);
         foreach($data as $key => $value){
             $stmt->bindValue(":$key", $value);

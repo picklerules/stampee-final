@@ -62,7 +62,7 @@ class ControllerMise extends Controller {
         $enchere = new Enchere();
         $encheresDetails = $enchere->getEnchereWithDetails();
         $detailEnchere = $enchere->selectId($id_enchere); 
-        //recupérer le prix minimum
+        //Recupérer le prix minimum
         $prixMinEnchere = $detailEnchere['prix_min'];
 
     
@@ -73,8 +73,6 @@ class ControllerMise extends Controller {
 
         if ($prix_offert <= $maxMiseValue) {
             $errors = "Votre mise doit être supérieure à la mise actuelle.";
-            $enchere = new Enchere();
-            $encheresDetails = $enchere->getEnchereWithDetails();
 
             foreach ($encheresDetails as $key => $enchereDetail) {
                 $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);

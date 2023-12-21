@@ -22,7 +22,8 @@ class Timbre extends CRUD {
     }
 
     public function getTimbreDetailsById($id) {
-        $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, image.file, utilisateur.username
+        $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, timbre.id_etat, etat.etat, timbre.id_pays_origine, pays_origine.pays, timbre.id_categorie, timbre.certifie,categorie.categorie, 
+        timbre.id_couleur, couleur.couleur, image.file, utilisateur.username
                 FROM timbre
                 JOIN etat ON timbre.id_etat = etat.id
                 JOIN pays_origine ON timbre.id_pays_origine = pays_origine.id

@@ -116,22 +116,34 @@ class ControllerTimbre extends Controller {
     public function edit($id) {
 
         $timbre = new Timbre();
-        $images = new Image();
         $timbreDetails = $timbre->getTimbreDetailsById($id);
-        $selectCategorie = $timbre->select('categorie');
-        $selectCouleur = $timbre->select('couleur');
-        $selectEtat = $timbre->select('etat');
-        $selectPaysOrigine = $timbre->select('pays');
-        $selectImages = $images->select('image');
-        return Twig::render('timbre/edit.php', ['timbre' => $timbreDetails, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'images' => $selectImages]);
+        $categorie = new Categorie;
+        $selectCategorie = $categorie->select('categorie');
+        $couleur = new Couleur;
+        $selectCouleur = $couleur->select('couleur');
+        $etat = new Etat;
+        $selectEtat = $etat->select('etat');
+        $pays = new PaysOrigine;
+        $selectPaysOrigine = $pays->select('pays');
+        // $images = new Image();
+        // $selectImages = $images->select('image');
+        return Twig::render('timbre/edit.php', ['timbre' => $timbreDetails, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine]);
 
     }
 
     public function update() {
         $validation = new Validation;
-        extract($_POST);
+        // Assignation des variables
+        $nom = isset($_POST['nom']) ? $_POST['nom'] : '';
+        $date_creation = isset($_POST['date_creation']) ? $_POST['date_creation'] : '';
+        $tirage = isset($_POST['tirage']) ? $_POST['tirage'] : '';
+        $dimensions = isset($_POST['dimensions']) ? $_POST['dimensions'] : '';
+        $certifie = isset($_POST['certifie']) ? $_POST['certifie'] : '';
         $id_utilisateur = $_SESSION['id'];
+        //Supprimer la clé submit du post
+        unset($_POST['submit']);
 
+    
         // Valide les données
         $validation->name('nom')->value($nom)->max(50)->required();
         $validation->name('date_creation')->value($date_creation)->pattern('date_ymd')->required(); 
@@ -149,7 +161,8 @@ class ControllerTimbre extends Controller {
             $pays = new PaysOrigine;
             $selectPaysOrigine = $pays->select('pays');
             $errors =  $validation->displayErrors();
-            return Twig::render('timbre/show.php', ['timbre' => $_POST, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'errors' => $errors]);
+
+            return Twig::render('timbre/edit.php', ['timbre' => $_POST, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'errors' => $errors]);
 
         } else {
             $timbre = new Timbre;

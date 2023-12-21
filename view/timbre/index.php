@@ -13,7 +13,7 @@
 
           <h2><a href="{{path}}timbre/show/{{ timbre.id }}">{{ timbre.nom }}</a></h2>
             <a href="{{path}}enchere/create/{{ timbre.id }}" class="btn">Mettre en enchère</a>
-            <a href="{{path}}timbre/edit" class="btn">Modifier</a>
+            <a href="{{path}}timbre/edit/{{ timbre.id }}" class="btn">Modifier</a>
             <form action="{{path}}timbre/destroy" method="post">
                 <input type="hidden" name="id" value="{{ timbre.id }}">
                 <button type="submit" class="btn">Supprimer</button>

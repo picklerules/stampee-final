@@ -64,7 +64,7 @@
                 <input type="file" name="images[]" multiple>
             </label>
             
-            <input type="submit" name="submit" value="Upload">
+            <input type="submit" name="submit" value="Soumettre">
 
         </form>
         
