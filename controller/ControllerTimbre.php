@@ -191,14 +191,15 @@ class ControllerTimbre extends Controller {
                 return Twig::render('timbre/index.php', ['errors' => $errors, 'timbres' => $timbre->getAllTimbresWithDetails()]);
             }
     
-            // Récupérer le chemin de l'image
-            $cheminImage = $timbre->getImagePath($_POST['id']);
-            
-            // Supprimer l'image si elle existe
-            if ($cheminImage && file_exists($cheminImage)) {
-                unlink($cheminImage);
+            // Récupérer les chemins de toutes les images associées au timbre
+            $cheminsImages = $timbre->getImagePaths($_POST['id']);
+
+            // Supprimer toutes les images si elles existent
+            foreach ($cheminsImages as $cheminImage) {
+                if (file_exists($cheminImage)) {
+                    unlink($cheminImage);
+                }
             }
-    
         
             $timbre->delete($_POST['id']);
     

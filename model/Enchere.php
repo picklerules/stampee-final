@@ -26,6 +26,7 @@ class Enchere extends CRUD {
     }
 
     public function isEnchereInMise($idEnchere) {
+
         $sql = "SELECT COUNT(*) 
                 FROM mise 
                 WHERE id_enchere = :idEnchere";
@@ -38,6 +39,7 @@ class Enchere extends CRUD {
     }
 
     public function getUserIdByEnchereId($idEnchere) {
+
         $sql = "SELECT id_utilisateur 
                 FROM enchere 
                 WHERE id = :id";
@@ -50,6 +52,7 @@ class Enchere extends CRUD {
     }
     
     public function getEnchereWithDetailsById($idEnchere) {
+        
         $sql = "SELECT enchere.*, timbre.nom
                 FROM enchere 
                 JOIN timbre ON enchere.id_timbre = timbre.id 

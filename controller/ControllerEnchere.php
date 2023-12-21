@@ -57,7 +57,6 @@ class ControllerEnchere extends Controller {
 
     public function store() {
 
-
         $validation = new Validation;
 
         $prix_min = isset($_POST['prix_min']) ? $_POST['prix_min'] : '';
@@ -95,6 +94,14 @@ class ControllerEnchere extends Controller {
     }
 
     public function edit($id) {
+        CheckSession::sessionAuth();
+
+        $enchere = new Enchere();
+        $enchereUserId = $enchere->getUserIdByEnchereId($id);
+        if ($enchereUserId != $_SESSION['id']) {
+            $errors = 'Vous ne pouvez pas modifier une enchère que vous n’avez pas créée.';
+            return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $enchere->getEnchereWithDetails()]);
+        }
 
         $enchere = new Enchere();
         $encheresDetails = $enchere->getEnchereWithDetailsById($id);

@@ -7,6 +7,7 @@ class Timbre extends CRUD {
     protected $fillable = ['nom', 'date_creation', 'tirage', 'dimensions', 'id_etat', 'id_pays_origine', 'id_categorie', 'id_couleur', 'certifie', 'id_utilisateur'];
 
     public function getAllTimbresWithDetails() {
+
         $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, timbre.id_utilisateur, image.file, utilisateur.username, utilisateur.id AS UserId
                 FROM timbre
                 JOIN etat ON timbre.id_etat = etat.id
@@ -22,6 +23,7 @@ class Timbre extends CRUD {
     }
 
     public function getTimbreDetailsById($id) {
+
         $sql = "SELECT timbre.id, timbre.nom, date_creation, tirage, dimensions, timbre.id_etat, etat.etat, timbre.id_pays_origine, pays_origine.pays, timbre.id_categorie, timbre.certifie,categorie.categorie, 
         timbre.id_couleur, couleur.couleur, image.file, utilisateur.username
                 FROM timbre
@@ -40,9 +42,10 @@ class Timbre extends CRUD {
     }
 
     public function getUserIdByTimbreId($timbreId) {
+
         $sql = "SELECT id_utilisateur 
-        FROM timbre 
-        WHERE id = :id";
+                FROM timbre 
+                WHERE id = :id";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':id', $timbreId);
         $stmt->execute();
@@ -61,15 +64,20 @@ class Timbre extends CRUD {
     //     return $stmt->fetchAll();
     // }
 
-    public function getImagePath($id) {
+    public function getImagePaths($idTimbre) {
         $sql = "SELECT file 
-        FROM $this->table 
-        WHERE id = :id";
+                FROM image 
+                WHERE id_timbre = :idTimbre";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(":id", $id);
+        $stmt->bindValue(":idTimbre", $idTimbre);
         $stmt->execute();
-        $result = $stmt->fetch();
-        return $result ? "uploads/" . $result['file'] : null;
+        $results = $stmt->fetchAll();
+    
+        $paths = [];
+        foreach ($results as $result) {
+            $paths[] = "uploads/" . $result['file'];
+        }
+        return $paths;
     }
 
     public function isTimbreInEnchere($idTimbre) {
