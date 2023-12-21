@@ -95,6 +95,35 @@ class ControllerEnchere extends Controller {
     }
 
 
+    public function destroy() {
+        CheckSession::sessionAuth();
+       
+            $enchere = new Enchere();
+
+            $enchereUserId = $enchere->getUserIdByEnchereId($_POST['id']);
+            if ($enchereUserId != $_SESSION['id']) {
+                $errors = 'Vous ne pouvez pas supprimer une enchère que vous n’avez pas créée.';
+                return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $enchere->getEnchereWithDetails()]);
+            }
+        
+
+            if ($enchere->isEnchereInMise($_POST['id'])) {
+                $errors = 'Vous ne pouvez pas supprimer une enchère qui a des mises.';
+                return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $enchere->getEnchereWithDetails()]);
+            }
+
+            //TO DO:
+            //message d'erreur si l'enchère est active 
+
+
+        
+            $enchere->delete($_POST['id']);
+    
+        
+            RequirePage::url('enchere/index');
+        
+    }
+    
 
 }
 

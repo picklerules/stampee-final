@@ -38,17 +38,33 @@ class Timbre extends CRUD {
         $stmt->execute();
         return $stmt->fetch();
     }
-    
-    public function getTimbresByUserId($userId) {
-        $sql = "SELECT * FROM timbre WHERE id_utilisateur = :userId";
+
+    public function getUserIdByTimbreId($timbreId) {
+        $sql = "SELECT id_utilisateur 
+        FROM timbre 
+        WHERE id = :id";
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':userId', $userId);
+        $stmt->bindValue(':id', $timbreId);
         $stmt->execute();
-        return $stmt->fetchAll();
+        $result = $stmt->fetch();
+        return $result ? $result['id_utilisateur'] : null;
     }
+    
+    
+    // public function getTimbresByUserId($userId) {
+    //     $sql = "SELECT * 
+    //     FROM timbre 
+    //     WHERE id_utilisateur = :userId";
+    //     $stmt = $this->prepare($sql);
+    //     $stmt->bindValue(':userId', $userId);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll();
+    // }
 
     public function getImagePath($id) {
-        $sql = "SELECT file FROM $this->table WHERE id = :id";
+        $sql = "SELECT file 
+        FROM $this->table 
+        WHERE id = :id";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(":id", $id);
         $stmt->execute();
@@ -57,7 +73,9 @@ class Timbre extends CRUD {
     }
 
     public function isTimbreInEnchere($idTimbre) {
-        $sql = "SELECT COUNT(*) FROM enchere WHERE id_timbre = :idTimbre";
+        $sql = "SELECT COUNT(*) 
+        FROM enchere 
+        WHERE id_timbre = :idTimbre";
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':idTimbre', $idTimbre);
         $stmt->execute();

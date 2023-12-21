@@ -28,7 +28,12 @@
                   <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
                   <button type="submit" class="btn">Miser</button>
               </form>
-                          
+              {% if enchere.id_utilisateur == session.id %}
+              <form action="{{path}}enchere/destroy" method="post">
+                <input type="hidden" name="id" value="{{ enchere.enchereId }}">
+                <button type="submit" class="btn">Supprimer</button>
+              </form> 
+              {% endif %}         
             </div>
 
           </div>

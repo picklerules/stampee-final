@@ -176,13 +176,19 @@ class ControllerTimbre extends Controller {
 
     public function destroy() {
         CheckSession::sessionAuth();
-        if ($_SESSION['privilege'] == 1 || $_SESSION['privilege'] == 2) {
+        
             $timbre = new Timbre();
+
+            $timbreUserId = $timbre->getUserIdByTimbreId($_POST['id']);
+            if ($timbreUserId != $_SESSION['id']) {
+                $errors = 'Vous ne pouvez pas supprimer un timbre que vous n’avez pas créé.';
+                return Twig::render('timbre/index.php', ['errors' => $errors, 'timbres' => $timbre->getAllTimbresWithDetails()]);
+            }
     
             if ($timbre->isTimbreInEnchere($_POST['id'])) {
               
-                $error = 'Vous ne pouvez pas supprimer un timbre qui est actuellement en enchère.';
-                return Twig::render('timbre/index.php', ['error' => $error, 'timbres' => $timbre->getAllTimbresWithDetails()]);
+                $errors = 'Vous ne pouvez pas supprimer un timbre qui est actuellement en enchère.';
+                return Twig::render('timbre/index.php', ['errors' => $errors, 'timbres' => $timbre->getAllTimbresWithDetails()]);
             }
     
             // Récupérer le chemin de l'image
@@ -198,10 +204,7 @@ class ControllerTimbre extends Controller {
     
         
             RequirePage::url('timbre/index');
-        } else {
-          
-            RequirePage::url('login');
-        }
+        
     }
     
     

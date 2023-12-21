@@ -17,6 +17,7 @@
             <form action="{{path}}timbre/destroy" method="post">
                 <input type="hidden" name="id" value="{{ timbre.id }}">
                 <button type="submit" class="btn">Supprimer</button>
+            </form>
         </article>
     {% endif %}
     {% endfor %}

@@ -24,6 +24,29 @@ class Enchere extends CRUD {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function isEnchereInMise($idEnchere) {
+        $sql = "SELECT COUNT(*) 
+        FROM mise 
+        WHERE id_enchere = :idEnchere";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':idEnchere', $idEnchere);
+        $stmt->execute();
+        $count = $stmt->fetchColumn();
+        return $count > 0;
+    }
+
+    public function getUserIdByEnchereId($enchereId) {
+        $sql = "SELECT id_utilisateur 
+        FROM enchere 
+        WHERE id = :id";
+        $stmt = $this->prepare($sql);
+        $stmt->bindValue(':id', $enchereId);
+        $stmt->execute();
+        $result = $stmt->fetch();
+        return $result ? $result['id_utilisateur'] : null;
+    }
+    
 }
 
 ?>
