@@ -92,6 +92,20 @@ class Timbre extends CRUD {
         return $count > 0;
     }
     
+    public function searchByName($keyword) {
+        $sql = "SELECT timbre.*, image.file 
+                FROM timbre
+                JOIN image ON timbre.id = image.id_timbre 
+                WHERE timbre.nom LIKE :keyword";
+        
+        $stmt = $this->prepare($sql);
+        $keyword = '%' . $keyword . '%';
+        $stmt->bindValue(':keyword', $keyword);
+        $stmt->execute();
+        
+        return $stmt->fetchAll();
+    }
+    
 
     
 

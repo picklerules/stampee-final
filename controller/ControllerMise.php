@@ -45,10 +45,19 @@ class ControllerMise extends Controller {
         $validation->name('prix_offert')->value($prix_offert)->pattern('float')->required();
         
         if (!$validation->isSuccess()) {
-            $errors = $validation->displayErrors();
+            $errors[$id_enchere] = $validation->displayErrors();
             $enchere = new Enchere();
             $encheresDetails = $enchere->getEnchereWithDetails();
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
+
+            // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
+            foreach ($encheresDetails as $key => $enchereDetail) {
+                $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
+                $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
+                // if($enchereDetail['enchereId']) {
+                // $encheresDetails[$key]['errors'] = "Votre mise doit être supérieure à la mise actuelle.";}
+                
+            }
         }
         
         
@@ -61,13 +70,18 @@ class ControllerMise extends Controller {
         $maxMiseValue = $maxMise ? $maxMise['max_mise'] : $prixMinEnchere; 
     
         if ($prix_offert <= $maxMiseValue) {
-            $errors = "Votre mise doit être supérieure à la mise actuelle.";
+            $errors[$id_enchere] = "Votre mise doit être supérieure à la mise actuelle.";
+            // $encheresDetails['errors'] = "Votre mise doit être supérieure à la mise actuelle."
+            // $errors = "Votre mise doit être supérieure à la mise actuelle.";
             $encheresDetails = $enchere->getEnchereWithDetails();
 
             // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
             foreach ($encheresDetails as $key => $enchereDetail) {
                 $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
                 $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
+                // if($enchereDetail['enchereId']) {
+                // $encheresDetails[$key]['errors'] = "Votre mise doit être supérieure à la mise actuelle.";}
+                
             }
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
         }
@@ -84,7 +98,7 @@ class ControllerMise extends Controller {
             return;
         }
     
-        RequirePage::url('mise/index');
+        RequirePage::url('enchere/index');
     }
     
 }

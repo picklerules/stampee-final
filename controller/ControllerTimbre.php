@@ -147,8 +147,8 @@ class ControllerTimbre extends Controller {
         // Valide les données
         $validation->name('nom')->value($nom)->max(50)->required();
         $validation->name('date_creation')->value($date_creation)->pattern('date_ymd')->required(); 
-        $validation->name('tirage')->value($tirage)->pattern('int')->min(0); 
-        $validation->name('dimensions')->value($dimensions)->max(255); 
+        $validation->name('tirage')->value($tirage)->pattern('int')->min(0)->required(); 
+        $validation->name('dimensions')->value($dimensions)->max(255)->required(); 
 
         if(!$validation->isSuccess()){
 
@@ -206,6 +206,21 @@ class ControllerTimbre extends Controller {
         
             RequirePage::url('timbre/index');
         
+    }
+    
+    public function search(){
+        $timbre = new Timbre();
+        $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : null;
+    
+        if ($keyword) {
+
+            $timbresDetails = $timbre->searchByName($keyword);
+            if (empty($timbresDetails)) {
+                $errors = "Aucun timbre ne correspond à cette recherche";
+            }
+        }
+
+        return Twig::render('timbre/index.php', ['timbres' => $timbresDetails, 'errors' => $errors ?? null ]);
     }
     
     

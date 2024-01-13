@@ -51,18 +51,25 @@ class Enchere extends CRUD {
         return $result ? $result['id_utilisateur'] : null;
     }
     
-    public function getEnchereWithDetailsById($idEnchere) {
-        
-        $sql = "SELECT enchere.*, timbre.nom
-                FROM enchere 
-                JOIN timbre ON enchere.id_timbre = timbre.id 
-                WHERE enchere.id = :idEnchere";
+    public function searchByTimbreName($keyword) {
+        $sql = "SELECT enchere.id AS enchereId, prix_min, date_debut, date_fin, coup_de_coeur, enchere.id_utilisateur, active, enchere.id_timbre, timbre.*, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, image.file
+                FROM enchere
+                JOIN timbre ON enchere.id_timbre = timbre.id
+                JOIN etat ON timbre.id_etat = etat.id
+                JOIN pays_origine ON timbre.id_pays_origine = pays_origine.id
+                JOIN categorie ON timbre.id_categorie = categorie.id
+                JOIN couleur ON timbre.id_couleur = couleur.id
+                JOIN image ON timbre.id = image.id_timbre
+                WHERE timbre.nom LIKE :keyword";
     
         $stmt = $this->prepare($sql);
-        $stmt->bindValue(':idEnchere', $idEnchere);
+        $stmt->bindValue(':keyword', '%' . $keyword . '%');
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchAll();
     }
+    
+
+    
 }
 
 ?>

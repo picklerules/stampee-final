@@ -1,0 +1,6 @@
+enchere timbre 1 a 1 , clé unique, 1 timbre par enchere, clef ID TIMBRE UNIQUE 
+
+validation modifier timbre
+revenir sur la meme page apres la mise 
+
+

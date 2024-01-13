@@ -2,13 +2,15 @@
 .main-catalogue{
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .liste {
     margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px
+    gap: 10px;
+    justify-content: center;
   }
 
   .item {

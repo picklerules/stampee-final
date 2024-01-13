@@ -16,7 +16,8 @@ class Mise extends CRUD {
                 JOIN timbre ON enchere.id_timbre = timbre.id
                 JOIN image ON timbre.id = image.id_timbre
                 JOIN utilisateur ON mise.id_utilisateur = utilisateur.id
-                WHERE mise.id_utilisateur = :id_utilisateur";
+                WHERE mise.id_utilisateur = :id_utilisateur
+                ORDER BY timbre.nom ASC, mise.prix_offert DESC";
 
         $stmt = $this->prepare($sql);
         $stmt->bindValue(':id_utilisateur', $id_utilisateur);

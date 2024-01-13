@@ -181,6 +181,22 @@ class ControllerEnchere extends Controller {
             RequirePage::url('enchere/index');
         
     }
+
+    public function search(){
+        $enchere = new Enchere();
+        $keyword = isset($_POST['keyword']) ? $_POST['keyword'] : null;
+    
+        if ($keyword) {
+            $encheresDetails = $enchere->searchByTimbreName($keyword);
+            if (empty($encheresDetails)) {
+                $errors = "Aucune enchère ne correspond à cette recherche";
+            }
+
+        }
+    
+        return Twig::render('enchere/index.php', ['encheres' => $encheresDetails, 'errors' => $errors ?? null]);
+    }
+    
     
 
 }

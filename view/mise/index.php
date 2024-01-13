@@ -1,6 +1,6 @@
 {{ include('header.php', {title: 'Mes mises'}) }}
 
-<main class="main-catalogue">
+<main class="main-mises">
     <span class="text-danger">{{ errors | raw }}</span>
     {% for mise in mises %}
     <div class="liste">
