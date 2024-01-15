@@ -21,9 +21,20 @@
 
           <h2><a href="#">{{ enchere.nom }} </a></h2>
           
-          <div class="details-timbre-container">
-         
-            <button class="btn"><i class="fa-solid fa-star fa-lg"></i></button>
+          <div class="details-timbre-container">  
+                <!-- bouton favoris -->
+                {% if enchere.estFavoris %}
+                  <form action="" method="post">
+                    <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
+                    <button type="button" class="btn remove-favorite" data-encherid="{{ enchere.enchereId }}"><i class="fa-solid fa-star fa-lg"></i></button>
+                  </form>
+                {% else %}
+                  <form action="" method="post">
+                    <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
+                    <button type="button" class="btn add-favorite" data-encherid="{{ enchere.enchereId }}"><i class="fa-regular fa-star fa-lg"></i></button>
+                  </form>
+                {% endif %}
+
             <div class="info-box">{{ enchere.pays }}</div>
               <div class="info-box">Prix de départ: {{ enchere.prix_min }} $</div>
               <div class="info-box">Prix actuel: {{ enchere.max_mise }} $</div>

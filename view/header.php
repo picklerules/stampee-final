@@ -4,8 +4,12 @@
                 <meta charset="UTF-8">
                 <meta name="description" content="Page d'accueil du site Stampee pour mise aux enchères de timbre">
                 <title>{{ title }}</title>
+
                 <link rel="stylesheet" href="{{path}}assets/css/styles.css">
+
                 <script src="https://kit.fontawesome.com/0f52bb4695.js" crossorigin="anonymous"></script>
+
+                <script type="module" src="{{path}}assets/scripts/main.js" defer></script>
             </head>
             <body>
             <header>
