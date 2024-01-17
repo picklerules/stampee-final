@@ -26,12 +26,12 @@
                 {% if enchere.estFavoris %}
                   <form action="" method="post">
                     <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
-                    <button type="button" class="btn remove-favorite" data-encherid="{{ enchere.enchereId }}"><i class="fa-solid fa-star fa-lg"></i></button>
+                    <button type="button" class="btn remove-favorite" data-encherid="{{ enchere.enchereId }}" data-js-component="Favoris"><i class="fa-solid fa-star fa-lg"></i></button>
                   </form>
                 {% else %}
                   <form action="" method="post">
                     <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
-                    <button type="button" class="btn add-favorite" data-encherid="{{ enchere.enchereId }}"><i class="fa-regular fa-star fa-lg"></i></button>
+                    <button type="button" class="btn add-favorite" data-encherid="{{ enchere.enchereId }}"  data-js-component="Favoris"><i class="fa-regular fa-star fa-lg"></i></button>
                   </form>
                 {% endif %}
 
@@ -44,9 +44,14 @@
                   <input type="text" name="prix_offert" class="input-miser" placeholder="{{ enchere.max_mise ? enchere.max_mise ~ ' $' : enchere.prix_min ~ ' $' }}">
                   <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
                   <button type="submit" class="btn">Miser</button>
+
                   {% if errors[enchere.enchereId] %}
-                      <div class="error-message">{{ errors[enchere.enchereId] }}</div>
+                    {% for error in errors[enchere.enchereId] %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
                   {% endif %}
+
+
               </form>
               {% if enchere.id_utilisateur == session.id %}
               <form action="{{path}}enchere/destroy" method="post">

@@ -1,55 +1,18 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Gérer l'ajout aux favoris
-    document.querySelectorAll('.add-favorite').forEach(function(btn) {
-        btn.addEventListener('click', function() {
+import { classesMapping } from './classMapping.js';
 
-            const enchereId = this.dataset.encherid;
-            const button = this;
 
-            fetch('/stampee-pw1/requetes/requetesAsync.php', {
+(function() {
+	
+	let elComponents = document.querySelectorAll('[data-js-component]');
 
-                method: 'POST',
-                body: JSON.stringify({ action: 'addToFavoris', id_enchere: enchereId }),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
+	for (let i = 0, l = elComponents.length; i < l; i++) {
 
-                if (data.success) {
+		let datasetComponent = elComponents[i].dataset.jsComponent, 			// => string
+			elComponent = elComponents[i];
 
-                    button.innerHTML = '<i class="fa-solid fa-star fa-lg"></i>';
-                    button.classList.remove('add-favorite');
-                    button.classList.add('remove-favorite');
-                }
-            })
-            .catch((error) => { console.log(error); });
-        });
-    });
-
-    // Gérer la suppression des favoris
-    document.querySelectorAll('.remove-favorite').forEach(function(btn) {
-        btn.addEventListener('click', function() {
-
-            const enchereId = this.dataset.encherid;
-
-            fetch('/stampee-pw1/requetes/requetesAsync.php', {
-
-                method: 'POST',
-                body: JSON.stringify({ action: 'removeFromFavoris', id_enchere: enchereId }),
-                headers: { 'Content-Type': 'application/json' }
-            })
-            .then(response => response.json())
-            .then(data => {
-
-                if (data.success) {
-
-                    button.innerHTML = '<i class="fa-regular fa-star fa-lg"></i>';
-                    button.classList.remove('remove-favorite');
-                    button.classList.add('add-favorite');
-                }
-            })
-            .catch((error) => { console.log(error); });
-        });
-    });
-});
-
+		for (let key in classesMapping) {
+			if (datasetComponent == key) new classesMapping[datasetComponent](elComponent);
+		}
+	}
+	
+})();

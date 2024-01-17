@@ -43,9 +43,13 @@ class ControllerMise extends Controller {
         $id_utilisateur = $_SESSION['id'];
         
         $validation->name('prix_offert')->value($prix_offert)->pattern('float')->required();
+
         
         if (!$validation->isSuccess()) {
-            $errors[$id_enchere] = $validation->displayErrors();
+            $errors = [];
+            foreach ($validation->displayErrors() as $field => $messages) {
+                $errors[$id_enchere][$field] = implode(", ", $messages);
+            }
             $enchere = new Enchere();
             $encheresDetails = $enchere->getEnchereWithDetails();
             return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
@@ -68,11 +72,11 @@ class ControllerMise extends Controller {
         //récupérer la max mise
         $maxMise = $mise->getMaxMise($id_enchere);
         $maxMiseValue = $maxMise ? $maxMise['max_mise'] : $prixMinEnchere; 
-    
+        
+
         if ($prix_offert <= $maxMiseValue) {
-            $errors[$id_enchere] = "Votre mise doit être supérieure à la mise actuelle.";
-            // $encheresDetails['errors'] = "Votre mise doit être supérieure à la mise actuelle."
-            // $errors = "Votre mise doit être supérieure à la mise actuelle.";
+            
+            $errors[$id_enchere] = ["Votre mise doit être supérieure à la mise actuelle."];
             $encheresDetails = $enchere->getEnchereWithDetails();
 
             // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
