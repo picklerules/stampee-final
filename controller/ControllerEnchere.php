@@ -71,9 +71,12 @@ class ControllerEnchere extends Controller {
         $validation->name('id_timbre')->value($id_timbre)->pattern('int')->required();
 
         if(!$validation->isSuccess()){
-
             $errors = $validation->displayErrors();
-            return Twig::render('enchere/create.php', ['errors' => $errors]);
+    
+            $timbre = new Timbre();
+            $timbres = [$timbre->selectId($id_timbre)];
+    
+            return Twig::render('enchere/create.php', ['errors' => $errors, 'timbres' => $timbres]);
         } else {
 
             $enchere = new Enchere();

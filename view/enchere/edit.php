@@ -14,7 +14,7 @@
         <label for="date_fin">Date de fin</label>
         <input type="date" id="date_fin" name="date_fin" value="{{ enchere.date_fin | date('Y-m-d') }}">
 
-        <input type="submit" name="submit" value="Modifier l'enchère">
+        <input type="submit" name="submit" value="Modifier l'enchère" class="btn">
 
         </form>
         

@@ -68,13 +68,31 @@ class ControllerTimbre extends Controller {
         // Valide les données
         $validation->name('nom')->value($nom)->max(50)->required();
         $validation->name('date_creation')->value($date_creation)->pattern('date_ymd')->required(); 
-        $validation->name('tirage')->value($tirage)->pattern('int')->min(0); 
-        $validation->name('dimensions')->value($dimensions)->max(255); 
+        $validation->name('tirage')->value($tirage)->pattern('int')->min(0)->required(); 
+        $validation->name('dimensions')->value($dimensions)->max(255)->required(); 
+        $validation->name('id_categorie')->value($_POST['id_categorie'])->pattern('int')->min(0)->required();
+        $validation->name('id_couleur')->value($_POST['id_couleur'])->pattern('int')->min(0)->required();
+        $validation->name('id_etat')->value($_POST['id_etat'])->pattern('int')->min(0)->required();
+        $validation->name('id_pays_origine')->value($_POST['id_pays_origine'])->pattern('int')->min(0)->required();
+
 
         if(!$validation->isSuccess()){
+
+            $categorie = new Categorie;
+            $selectCategorie = $categorie->select('categorie');
+            $couleur = new Couleur;
+            $selectCouleur = $couleur->select('couleur');
+            $etat = new Etat;
+            $selectEtat = $etat->select('etat');
+            $pays = new PaysOrigine;
+            $selectPaysOrigine = $pays->select('pays');
+
             $errors = $validation->displayErrors();
-            return Twig::render('timbre/create.php', ['errors' => $errors, 'timbre' => $_POST]);
+
+            return Twig::render('timbre/create.php', ['errors' => $errors, 'categories' => $selectCategorie, 'couleurs' => $selectCouleur, 'etats' => $selectEtat, 'pays' => $selectPaysOrigine, 'timbre' => $_POST]);
+
         } else {
+            
             // Insertion du timbre
             $timbre = new Timbre();
             $insertId = $timbre->insert($_POST);
