@@ -24,17 +24,17 @@
       </div>
       <div class="modal" data-js-component="Filtres">
         <div class="close-button">X</div>
-        <div class="category" data-js-filtre="monde">Timbres du Monde</div>
+        <div class="category" data-js-filtre="timbres du monde">Timbres du Monde</div>
         <div class="category" data-js-filtre="rares">Rares</div>
-        <div class="category" data-js-filtre="nouveaute">Nouveautés</div>
-        <div class="category" data-js-filtre="editions_limites">Éditions Limitées</div>
+        <div class="category" data-js-filtre="nouveautes">Nouveautés</div>
+        <div class="category" data-js-filtre="editions limitees">Éditions Limitées</div>
         <div class="category" data-js-filtre="thematiques">Thématiques</div>
         <div class="category" data-js-filtre="classiques">Classiques</div>
         <div class="category" data-js-filtre="series">Séries</div>
-        <div class="category" data-js-filtre="ensemble">Ensembles</div>
+        <div class="category" data-js-filtre="ensembles">Ensembles</div>
         <div class="category" data-js-filtre="usages">Usagés</div>
-        <div class="category" data-js-filtre="comme_neufs">Comme neufs</div>
-        <div class="category" data-js-filtre="en_stock">En stock</div>
+        <div class="category" data-js-filtre="comme neufs">Comme neufs</div>
+        <div class="category" data-js-filtre="en stock">En stock</div>
         <div class="category" data-js-filtre="archives">Archives</div>
     </div>
       <nav>

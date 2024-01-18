@@ -76,7 +76,7 @@ class ControllerMise extends Controller {
 
         if ($prix_offert <= $maxMiseValue) {
             
-            $errors[$id_enchere] = ["Votre mise doit être supérieure à la mise actuelle."];
+            $bidErrors[$id_enchere] = ["Votre mise doit être supérieure à la mise actuelle."];
             $encheresDetails = $enchere->getEnchereWithDetails();
 
             // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
@@ -87,7 +87,7 @@ class ControllerMise extends Controller {
                 // $encheresDetails[$key]['errors'] = "Votre mise doit être supérieure à la mise actuelle.";}
                 
             }
-            return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
+            return Twig::render('enchere/index.php', ['bidErrors' => $bidErrors, 'encheres' => $encheresDetails]);
         }
     
         $insertResult = $mise->insert([

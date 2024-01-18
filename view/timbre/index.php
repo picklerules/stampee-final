@@ -6,7 +6,7 @@
 <!-- Formulaire de recherche -->
 <form action="{{path}}timbre/search" method="POST">
   <input type="text" name="keyword" placeholder="Recherche de timbres..." value="{{ searchKeyword | default('') }}">
-  <button type="submit">Rechercher</button>
+  <button type="submit" class="btn">Rechercher</button>
 </form>
 
 <a href="{{path}}timbre/create" class="btn">Ajouter un timbre</a>

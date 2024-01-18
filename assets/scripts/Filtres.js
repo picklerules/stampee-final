@@ -49,7 +49,8 @@ export default class Filtres {
     
         createEnchereHtml(data) {
 
-            let imagePath = '/stampee-pw1/uploads/' + data.file; 
+            let imagePath = '/stampee-pw1/uploads/' + data.file;
+             
         
             return `
                 <article class="item-enchere">
@@ -63,7 +64,7 @@ export default class Filtres {
                             <form action="" method="post">
                                 <input type="hidden" name="id_enchere" value="${data.id}">
                                 <button type="button" class="btn remove-favorite" data-encherid="${data.id}" data-js-component="Favoris">
-                                    <i class="fa-solid fa-star fa-lg"></i>
+                                    <i class="fa-regular fa-star fa-lg"></i>
                                 </button>
                             </form>
                             <div class="info-box">${data.pays}</div>
@@ -73,7 +74,6 @@ export default class Filtres {
                             <div class="info-box">Couleur: ${data.couleur}</div>
                             <div class="info-box">Date de début: ${data.date_debut}</div>
                             <div class="info-box">Date de fin: ${data.date_fin}</div>
-                            <!-- Add any other details that you have and need to display -->
                         </div>
                     </div>
                 </article>`;

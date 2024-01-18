@@ -4,7 +4,7 @@
   <!-- Formulaire de recherche -->
   <form action="{{path}}enchere/search" method="POST">
       <input type="text" name="keyword" placeholder="Recherche d'enchères..." value="{{ searchKeyword | default('') }}">
-      <button type="submit">Rechercher</button>
+      <button type="submit" class="btn">Rechercher</button>
       <span class="text-danger">{{ errors | raw }}</span>
     </form>
 
@@ -46,9 +46,9 @@
                   <input type="hidden" name="id_enchere" value="{{ enchere.enchereId }}">
                   <button type="submit" class="btn">Miser</button>
 
-                  {% if errors[enchere.enchereId] %}
-                    {% for error in errors[enchere.enchereId] %}
-                        <div class="error-message">{{ error }}</div>
+                  {% if bidErrors[enchere.enchereId] %}
+                    {% for bidError in bidErrors[enchere.enchereId] %}
+                        <div class="error-message">{{ bidError }}</div>
                     {% endfor %}
                   {% endif %}
 
