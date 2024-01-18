@@ -119,13 +119,11 @@ class ControllerEnchere extends Controller {
         $prix_min = isset($_POST['prix_min']) ? $_POST['prix_min'] : '';
         $date_debut = isset($_POST['date_debut']) ? $_POST['date_debut'] : '';
         $date_fin = isset($_POST['date_fin']) ? $_POST['date_fin'] : '';
-        $id_timbre = isset($_POST['id_timbre']) ? $_POST['id_timbre'] : '';
         $id_utilisateur = $_SESSION['id'];
-        $idEnchere = isset($_POST['id'])? $_POST['id'] : '';
-
 
         //Supprimer la clé submit du post
         unset($_POST['submit']);
+      
     
         // Valide les données
         $validation->name('prix_min')->value($prix_min)->pattern('float')->required();

@@ -87,6 +87,21 @@ class ControllerMise extends Controller {
             }
             return Twig::render('enchere/index.php', ['bidErrors' => $bidErrors, 'encheres' => $encheresDetails]);
         }
+
+        if ($prix_offert <= $prixMinEnchere) {
+            
+            $bidErrors[$id_enchere] = ["Votre mise doit être supérieure à la mise de départ."];
+            $encheresDetails = $enchere->getEnchereWithDetails();
+
+            // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
+            foreach ($encheresDetails as $key => $enchereDetail) {
+                $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
+                $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
+       
+            }
+            return Twig::render('enchere/index.php', ['bidErrors' => $bidErrors, 'encheres' => $encheresDetails]);
+        }
+    
     
         $insertResult = $mise->insert([
             'prix_offert' => $prix_offert,

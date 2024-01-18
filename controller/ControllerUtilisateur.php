@@ -27,7 +27,7 @@ class ControllerUtilisateur extends Controller {
     
         $i = 0;
         foreach ($select as $user) {
-            // Ajout des informations de privilège
+           
             $selectPrivilege = $privilege->selectId($user['id_privilege']);
             $select[$i]['privilege'] = $selectPrivilege['privilege'];
     
@@ -57,12 +57,14 @@ class ControllerUtilisateur extends Controller {
         $validation->name('password')->value($password)->max(255)->min(6)->required();
         $validation->name('email')->value($email)->max(50)->required()->pattern('email');
     
-        if ($_SESSION['privilege'] != 1) {
+        $isAdmin = isset($_SESSION['privilege']) && $_SESSION['privilege'] == 1;
+
+        if (!$isAdmin) {
             $id_privilege = 2;
         } else {
-            $id_privilege = $_POST['id_privilege'] ?? 2;
+   
+            $id_privilege = isset($_POST['id_privilege']) ? $_POST['id_privilege'] : 2;
         }
-    
         if(!$validation->isSuccess()) {
             $errors =  $validation->displayErrors();
             // Retour à la vue de création avec les messages d'erreur

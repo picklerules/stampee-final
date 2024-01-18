@@ -34,7 +34,6 @@
         <div class="category" data-js-filtre="ensembles">Ensembles</div>
         <div class="category" data-js-filtre="usages">Usagés</div>
         <div class="category" data-js-filtre="comme neufs">Comme neufs</div>
-        <div class="category" data-js-filtre="en stock">En stock</div>
         <div class="category" data-js-filtre="archives">Archives</div>
     </div>
       <nav>
