@@ -1,0 +1,6 @@
+.title {
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-family: var(--police-sous-titre);
+    color: var(--couleur-accent);
+}

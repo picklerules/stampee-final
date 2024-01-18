@@ -1,15 +1,16 @@
 {{ include('header.php', {title: 'Ajouter un utilisateur'}) }}
-<body>
+<body class="user">
+<h1 class="title">Devenir membre</h1>
     <div class="form-container">
         <form action="{{path}}utilisateur/store" method="post">
             <span class="text-danger">{{ errors | raw }}</span>
-            <label>Utilisateur
+            <label>Nom d'utilisateur : 
                 <input type="text" name="username" value="{{utilisateur.username}}">
             </label>
-            <label>Courriel
+            <label>Courriel : 
                 <input type="email" name="email" value="">
             </label>
-            <label>Mot de passe
+            <label>Mot de passe :
                 <input type="password" name="password" value="">
             </label>
             {% if session.privilege == 1 %}

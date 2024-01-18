@@ -1,7 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
 RequirePage::model('CRUD');
 RequirePage::model('Timbre');
@@ -22,6 +19,9 @@ class ControllerEnchere extends Controller {
         $enchere = new Enchere();
         $mise = new Mise();
         $encheresDetails = $enchere->getEnchereWithDetails();
+
+         // Debugging: Check if any data is fetched
+    error_log(print_r($encheresDetails, true));
 
         foreach ($encheresDetails as $key => $enchereDetail) {
             $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);

@@ -1,15 +1,10 @@
-
-*{
-    box-sizing: border-box;
-}
-
-body {
+.user {
     font-family: var(--police-texte);
     background-color: var(--couleur-silver);
     color: var(--couleur-blanc);
     display:flex;
     flex-direction: column;
-    justify-content: center;    
+    justify-content: center;
+    align-items: center;
+    
 }
-
-

@@ -1,6 +1,9 @@
   /*Style pour les form*/
 
   .form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 100%;
     max-width: 400px;
     margin: 1rem auto;
@@ -10,9 +13,13 @@
   }
   
   label, select {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-bottom: 10px;
     font-weight: bold;
+    font-family: var(--police-texte);
+    text-transform: uppercase;
   }
   
   input, select {

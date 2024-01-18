@@ -27,7 +27,6 @@ if (isset($data['action'])) {
         case 'filterByCategorie':
             if (isset($data['categorie'])) {
                 $resultats = getEncheresByTimbresCategorie($data['categorie']);
-                error_log(print_r($resultats, true)); 
                 $data = [];
         
                 if (mysqli_num_rows($resultats) > 0) {
@@ -37,8 +36,6 @@ if (isset($data['action'])) {
                 }
         
                 header('Content-type: application/json; charset=utf-8');
-                error_log(print_r($data, true));
-
                 echo json_encode($data);
             }
             break;

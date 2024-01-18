@@ -1,6 +1,5 @@
 {{ include('header.php', {title: 'Liste des utilisateurs'}) }}
-<body>
-    <h1>Utilisateurs</h1>
+<body class="user">
         <div class="table-container">
             <table>
                 <tr>
@@ -20,6 +19,6 @@
             <br><br>
             
         </div>
-        <a href="{{path}}utilisateur/create">Ajouter</a>
+        <a href="{{path}}utilisateur/create" class="btn">Ajouter</a>
 </body>
 </html>

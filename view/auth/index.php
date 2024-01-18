@@ -1,13 +1,13 @@
 {{ include('header.php', {title: 'Login'}) }}
-<body>
+<body class="user">
+    <h1 class="title">Se connecter</h1>
     <div class="form-container">
         <form action="{{path}}login/auth" method="post">
-            <h3>Login</h3>
             <span class="text-danger">{{ errors | raw }}</span>
-            <label>Utilisateur
+            <label>Nom d'utilisateur :
                 <input type="text" name="username" value="">
             </label>
-            <label>Mot de passe
+            <label>Mot de passe :
                 <input type="password" name="password" value="">
             </label>
             <input type="submit" value="Connecter" class="btn">

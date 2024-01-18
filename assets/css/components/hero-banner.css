@@ -9,7 +9,12 @@
 
 
 .slogan {
+
     position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
     top: 50%; 
     left: 50%; 
     transform: translate(-50%, -50%);
