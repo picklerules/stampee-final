@@ -70,7 +70,8 @@ class Enchere extends CRUD {
         $stmt->execute();
         return $stmt->fetchAll();
     }
-    
+
+
 
     
 }

@@ -11,8 +11,7 @@ if (isset($data['action'])) {
 
         case 'addToFavoris':
             if (isset($data['id_enchere'])) {
-                // Ajouter l'enchère aux favoris
-                // Utilisez une fonction de votre fichier fonctionsDB pour gérer l'insertion
+
                 $result = addEnchereToFavoris($_SESSION['id'], $data['id_enchere']);
                 echo json_encode(['success' => $result]);
             }
@@ -20,13 +19,29 @@ if (isset($data['action'])) {
     
         case 'removeFromFavoris':
             if (isset($data['id_enchere'])) {
-                // Supprimer l'enchère des favoris
-                // Utilisez une fonction de votre fichier fonctionsDB pour gérer la suppression
+                
                 $result = removeEnchereFromFavoris($_SESSION['id'], $data['id_enchere']);
                 echo json_encode(['success' => $result]);
             }
             break;
-    
+        case 'filterByCategorie':
+            if (isset($data['categorie'])) {
+                $resultats = getEncheresByTimbresCategorie($data['categorie']);
+                error_log(print_r($resultats, true)); 
+                $data = [];
+        
+                if (mysqli_num_rows($resultats) > 0) {
+                    while ($enchere = mysqli_fetch_assoc($resultats)) {
+                        $data[] = $enchere;
+                    }
+                }
+        
+                header('Content-type: application/json; charset=utf-8');
+                echo json_encode($data);
+            }
+            break;
+        
+
 
         default:
     }

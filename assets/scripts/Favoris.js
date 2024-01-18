@@ -2,10 +2,10 @@ export default class Favoris {
     constructor(button) {
         this.button = button;
         this.enchereId = button.dataset.encherid;
-        this.initEvents();
+        this.init();
     }
 
-    initEvents() {
+    init() {
         this.button.addEventListener('click', () => {
             if (this.button.classList.contains('add-favorite')) {
                 this.addToFavoris();
@@ -25,7 +25,6 @@ export default class Favoris {
         .then(data => {
             if (data.success) {
                 this.updateButton(true);
-                console.log(this.button.classList);
             }
         })
         .catch((error) => { console.log(error); });
@@ -41,7 +40,6 @@ export default class Favoris {
         .then(data => {
             if (data.success) {
                 this.updateButton(false);
-                console.log(this.button.classList);
             }
         })
         .catch((error) => { console.log(error); });
@@ -57,11 +55,18 @@ export default class Favoris {
             this.button.classList.remove('remove-favorite');
             this.button.classList.add('add-favorite');
         }
+      
+        this.init();
     }
 }
 
+// Initialisation
 document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('[data-js-component="Favoris"]').forEach(button => {
         new Favoris(button);
     });
 });
+
+
+// TODO:
+// -MAJ du UI remove sans chargement de page

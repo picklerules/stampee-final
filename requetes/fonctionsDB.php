@@ -56,6 +56,16 @@
         return executeRequete("DELETE FROM favoris WHERE id_utilisateur = '$idUser' AND id_enchere = '$idEnchere'", true);
     }
 
+	function getEncheresByTimbresCategorie($categorie) {
+
+		return executeRequete("SELECT * FROM enchere
+									JOIN timbre ON timbre.id = enchere.id_timbre
+									JOIN categorie ON timbre.id_categorie = categorie.id
+									WHERE categorie = '$categorie'");
+
+	}
+	
+
 	
 
 

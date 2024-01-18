@@ -22,20 +22,20 @@
       <div class="site-name">
           STAMPEE
       </div>
-      <div class="modal">
+      <div class="modal" data-js-component="Filtres">
         <div class="close-button">X</div>
-        <div class="category"><a href="catalogue.html">Timbres du Monde</a></div>
-        <div class="category"><a href="catalogue.html">Rares</a></div>
-        <div class="category"><a href="catalogue.html">Nouveautés</a></div>
-        <div class="category"><a href="catalogue.html">Éditions Limitées</a></div>
-        <div class="category"><a href="catalogue.html">Thématiques</a></div>
-        <div class="category"><a href="catalogue.html">Classiques</a></div>
-        <div class="category"><a href="catalogue.html">Séries</a></div>
-        <div class="category"><a href="catalogue.html">Ensembles</a></div>
-        <div class="category"><a href="catalogue.html">Usagés</a></div>
-        <div class="category"><a href="catalogue.html">Comme neufs</a></div>
-        <div class="category"><a href="catalogue.html">En stock</a></div>
-        <div class="category"><a href="catalogue.html">Archives</a></div>
+        <div class="category" data-js-filtre="monde">Timbres du Monde</div>
+        <div class="category" data-js-filtre="rares">Rares</div>
+        <div class="category" data-js-filtre="nouveaute">Nouveautés</div>
+        <div class="category" data-js-filtre="editions_limites">Éditions Limitées</div>
+        <div class="category" data-js-filtre="thematiques">Thématiques</div>
+        <div class="category" data-js-filtre="classiques">Classiques</div>
+        <div class="category" data-js-filtre="series">Séries</div>
+        <div class="category" data-js-filtre="ensemble">Ensembles</div>
+        <div class="category" data-js-filtre="usages">Usagés</div>
+        <div class="category" data-js-filtre="comme_neufs">Comme neufs</div>
+        <div class="category" data-js-filtre="en_stock">En stock</div>
+        <div class="category" data-js-filtre="archives">Archives</div>
     </div>
       <nav>
           <ul>
