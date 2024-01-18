@@ -58,9 +58,14 @@
 
 	function getEncheresByTimbresCategorie($categorie) {
 
-		return executeRequete("SELECT * FROM enchere
+		return executeRequete("SELECT enchere.id, prix_min, date_debut, date_fin, coup_de_coeur, enchere.id_utilisateur, active, enchere.id_timbre, timbre.*, etat.etat, pays_origine.pays, categorie.categorie, couleur.couleur, image.file
+									FROM enchere
 									JOIN timbre ON timbre.id = enchere.id_timbre
 									JOIN categorie ON timbre.id_categorie = categorie.id
+									JOIN etat ON timbre.id_etat = etat.id
+									JOIN pays_origine ON timbre.id_pays_origine = pays_origine.id
+									JOIN couleur ON timbre.id_couleur = couleur.id
+									JOIN image ON timbre.id = image.id_timbre
 									WHERE categorie = '$categorie'");
 
 	}

@@ -36,6 +36,7 @@
                 {% endif %}
 
             <div class="info-box">{{ enchere.pays }}</div>
+            <div class="info-box">{{ enchere.categorie }}</div>
               <div class="info-box">Prix de départ: {{ enchere.prix_min }} $</div>
               <div class="info-box">Prix actuel: {{ enchere.max_mise }} $</div>
               <div class="info-box">Date de début: {{ enchere.date_debut }} </div>
@@ -68,51 +69,6 @@
       </div>
       {% endfor %}  
 
-
-
-
-
-      <!-- template -->
-      <template data-js-template-enchere >
-          <h2><a href="#">{{ nom }} </a></h2>
-          
-          <div class="details-timbre-container">  
-                <!-- bouton favoris -->
- 
-                  <form action="" method="post">
-                    <input type="hidden" name="id_enchere" value="{{ enchereId }}">
-                    <button type="button" class="btn remove-favorite" data-encherid="{{ enchereId }}" data-js-component="Favoris"><i class="fa-solid fa-star fa-lg"></i></button>
-                  </form>
-
-                  <form action="" method="post">
-                    <input type="hidden" name="id_enchere" value="{{ enchereId }}">
-                    <button type="button" class="btn add-favorite" data-encherid="{{ enchereId }}"  data-js-component="Favoris"><i class="fa-regular fa-star fa-lg"></i></button>
-                  </form>
-
-
-            <div class="info-box">{{ pays }}</div>
-              <div class="info-box">Prix de départ: {{ prix_min }} $</div>
-              <div class="info-box">Prix actuel: {{ max_mise }} $</div>
-              <div class="info-box">Date de début: {{ date_debut }} </div>
-              <div class="info-box">Date de fin: {{ date_fin }} </div>
-              <form action="{{path}}mise/store" method="post">  
-                  <input type="text" name="prix_offert" class="input-miser" placeholder="{{ max_mise ? max_mise ~ ' $' : prix_min ~ ' $' }}">
-                  <input type="hidden" name="id_enchere" value="{{ enchereId }}">
-                  <button type="submit" class="btn">Miser</button>
-              </form>
-  
-              <form action="{{path}}enchere/destroy" method="post">
-                <input type="hidden" name="id" value="{{ enchereId }}">
-                <button type="submit" class="btn">Supprimer</button>
-              </form> 
-              <a href="{{path}}enchere/edit/{{ enchereId }}" class="btn">Modifier</a>
-     
-            </div>
-
-          </div>
-   
-        </article>
-    </template>
     
     </main>
     

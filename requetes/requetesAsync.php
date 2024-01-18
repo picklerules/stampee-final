@@ -37,6 +37,8 @@ if (isset($data['action'])) {
                 }
         
                 header('Content-type: application/json; charset=utf-8');
+                error_log(print_r($data, true));
+
                 echo json_encode($data);
             }
             break;
