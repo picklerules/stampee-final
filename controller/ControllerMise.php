@@ -44,24 +44,24 @@ class ControllerMise extends Controller {
         
         $validation->name('prix_offert')->value($prix_offert)->pattern('float')->required();
 
-        
+
         if (!$validation->isSuccess()) {
-            $errors = [];
-            foreach ($validation->displayErrors() as $field => $messages) {
-                $errors[$id_enchere][$field] = implode(", ", $messages);
-            }
+          
+            $bidErrors[$id_enchere] = ["Veuillez écrire un montant."];
+
             $enchere = new Enchere();
             $encheresDetails = $enchere->getEnchereWithDetails();
-            return Twig::render('enchere/index.php', ['errors' => $errors, 'encheres' => $encheresDetails]);
 
             // Ajouter la mise maximale pour chaque enchère en cas d'échec de validation
             foreach ($encheresDetails as $key => $enchereDetail) {
                 $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
                 $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
-                // if($enchereDetail['enchereId']) {
-                // $encheresDetails[$key]['errors'] = "Votre mise doit être supérieure à la mise actuelle.";}
                 
             }
+            
+            return Twig::render('enchere/index.php', ['bidErrors' => $bidErrors, 'encheres' => $encheresDetails]);
+
+
         }
         
         
@@ -83,9 +83,7 @@ class ControllerMise extends Controller {
             foreach ($encheresDetails as $key => $enchereDetail) {
                 $maxMise = $mise->getMaxMise($enchereDetail['enchereId']);
                 $encheresDetails[$key]['max_mise'] = $maxMise['max_mise'] ?? $enchereDetail['prix_min'];
-                // if($enchereDetail['enchereId']) {
-                // $encheresDetails[$key]['errors'] = "Votre mise doit être supérieure à la mise actuelle.";}
-                
+       
             }
             return Twig::render('enchere/index.php', ['bidErrors' => $bidErrors, 'encheres' => $encheresDetails]);
         }
