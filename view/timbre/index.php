@@ -16,7 +16,7 @@
     {% if timbre.id_utilisateur == session.id %}
         <article class="item">
           
-          <img data-js-component="image-zoom" class="img-stamp" src="{{path}}uploads/{{ timbre.file }}" alt="{{ timbre.nom }}" loading="lazy">
+          <img class="img-stamp" src="{{path}}uploads/{{ timbre.file }}" alt="{{ timbre.nom }}" loading="lazy">
 
           <h2><a href="{{path}}timbre/show/{{ timbre.id }}">{{ timbre.nom }}</a></h2>
             <a href="{{path}}enchere/create/{{ timbre.id }}" class="btn">Mettre en enchère</a>

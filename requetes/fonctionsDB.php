@@ -8,6 +8,11 @@
 		define('DB_HOST', 'localhost');
 		define('DB_USER', 'root');
 		define('DB_PASSWORD', 'root');			// MAC
+
+		// define('DB_HOST', 'localhost');
+		// define('DB_USER', 'e2395496');
+		// define('DB_PASSWORD', '32fEWjU4cTBDn03DWq9Y');			// webdev
+
 		//define('DB_PASSWORD', '');			// Windows
 
 		$laConnexion = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD);
@@ -17,7 +22,8 @@
 			die('Erreur de connexion à la base de données. ' . mysqli_connect_error());
 		}
 		
-		$db = mysqli_select_db($laConnexion, 'stampee');
+		//$db = mysqli_select_db($laConnexion, 'stampee'); //local
+		$db = mysqli_select_db($laConnexion, 'e2395496');  //webdev
 
 		if (!$db) {
 			die ('La base de données n\'existe pas.');

@@ -67,6 +67,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-// TODO:
-// -MAJ du UI remove sans chargement de page

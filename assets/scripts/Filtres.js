@@ -34,7 +34,7 @@ export default class Filtres {
                 else throw new Error('La réponse n\'est pas ok');
             })
             .then(data => {
-                this._elEncheresContainer.innerHTML = ''; // Clear the container
+                this._elEncheresContainer.innerHTML = ''; 
     
                 data.forEach(enchereData => {
                     console.log(enchereData); 
