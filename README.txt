@@ -1,3 +1,5 @@
+
+```markdown
 # Stampee: Modern Stamp Bidding Platform
 
 "Stampee" is a dynamic web application designed as a school project to serve as an online bidding platform for stamp collectors. Developed with a custom MVC architecture and utilizing MySQL for database management, this project incorporates full CRUD operations to provide a comprehensive user experience for both administrators and users. The project's development was guided by UX/UI principles to cater to a modern, tech-oriented audience.
@@ -53,5 +55,4 @@ To explore Stampee's full functionalities, demo accounts are available. Please n
 - **Username:** pickle
 - **Password:** 123456
 
-**Website:** [Stampee - Demo](https://e2395496.webdev.cmaisonneuve.qc.ca/stampee-pw1/)
-
+```
