@@ -54,4 +54,4 @@ To explore Stampee's full functionalities, demo accounts are available. Please n
 - **Password:** 123456
 
 **Website:** [Stampee - Demo](https://e2395496.webdev.cmaisonneuve.qc.ca/stampee-pw1/)
-```
+
